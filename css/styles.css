@@ -276,6 +276,7 @@ input::placeholder {
   justify-content: center;
   margin-top: 10rem;
   animation: spin 1s linear infinite;
+  opacity: 80%;
 }
 
 @keyframes spin {
@@ -291,4 +292,35 @@ input::placeholder {
   .container {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+/* FLIGHT VIEW */
+
+.container-2 {
+  overflow: hidden;
+}
+
+.flight-image {
+  max-width: 100%;
+  object-fit: cover;
+  opacity: 60%;
+  overflow-x: hidden;
+}
+
+.second-div {
+  max-width: 60rem;
+  margin: 0 auto;
+  box-shadow: 1px 2px 3rem #868e96;
+  background-color: #fff;
+}
+
+.grid-container {
+  padding: 3.2rem 2rem;
+}
+
+.paragraph {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 2.2rem;
+  color: red;
 }

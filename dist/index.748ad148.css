@@ -232,6 +232,7 @@ input::placeholder {
 }
 
 .spinner i {
+  opacity: .8;
   justify-content: center;
   margin-top: 10rem;
   font-size: 5rem;
@@ -253,6 +254,35 @@ input::placeholder {
   .container {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+.container-2 {
+  overflow: hidden;
+}
+
+.flight-image {
+  object-fit: cover;
+  opacity: .6;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.second-div {
+  background-color: #fff;
+  max-width: 60rem;
+  margin: 0 auto;
+  box-shadow: 1px 2px 3rem #868e96;
+}
+
+.grid-container {
+  padding: 3.2rem 2rem;
+}
+
+.paragraph {
+  text-align: center;
+  color: red;
+  padding-top: 2rem;
+  font-size: 2.2rem;
 }
 
 /*# sourceMappingURL=index.748ad148.css.map */
