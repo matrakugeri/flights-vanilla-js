@@ -1,0 +1,258 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Nunito, Geist Mono, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.container {
+  background-color: #d3dce1;
+  border-radius: 22px;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+  max-width: 120rem;
+  min-height: 100vh;
+  margin: 5rem auto;
+  display: grid;
+  box-shadow: 0 2rem 6rem .5rem #61555133;
+}
+
+.container-1 {
+  background-color: #d3c7c3;
+  border-radius: 22px 0 0 22px;
+}
+
+.inner-container {
+  padding: 1.2rem 2.4rem 3rem;
+}
+
+.container-p {
+  font-size: 3.4rem;
+  font-weight: 600;
+}
+
+.heading {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.add-btn {
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  background-color: #495057;
+  border: none;
+  margin-left: auto;
+  padding: 1.2rem 2.2rem;
+  font-family: Lucida Sans;
+  transition: all .4s;
+}
+
+.add-btn span {
+  font-size: 1.2rem;
+}
+
+.add-btn:hover {
+  background-color: #adb5bd;
+}
+
+input {
+  border: none;
+  border-radius: 22px;
+  outline: none;
+  width: 100%;
+  margin-top: 2.4rem;
+  padding: 1.6rem 3.4rem;
+}
+
+.btn {
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  background-color: #fbdb89;
+  border: none;
+  border-radius: 22px;
+  padding: 1.6rem 2.2rem;
+  font-weight: 600;
+  transition: all .4s;
+  display: inline-block;
+  transform: translateX(-50%);
+}
+
+.btn:hover {
+  background-color: #c9d597;
+}
+
+input::placeholder {
+  opacity: .8;
+  color: #868e96;
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+.search-results {
+  list-style: none;
+}
+
+.image {
+  filter: grayscale();
+  width: 12rem;
+  height: 8rem;
+}
+
+.list-div {
+  border-bottom: 2px solid #aaa;
+  align-items: center;
+  gap: 2rem;
+  display: flex;
+}
+
+.departure, .flight, .title, .status {
+  font-size: 1.4rem;
+}
+
+.flight, .status, .departure {
+  font-weight: 300;
+}
+
+.list-link:link, .list-link:visited {
+  color: #000;
+  text-decoration: none;
+}
+
+.list-item {
+  background-color: #e9ecef;
+  transition: all .4s;
+}
+
+.list-item:hover {
+  background-color: #ced4da;
+}
+
+.pagination {
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.2rem 1.2rem 0;
+  display: flex;
+}
+
+.pagination-btn {
+  cursor: pointer;
+  background-color: #868e96;
+  border: none;
+  border-radius: 22px;
+  padding: 1.2rem 2.2rem;
+  transition: all .4s;
+  display: inline-block;
+}
+
+.pagination-btn:hover {
+  background-color: #495057;
+}
+
+.pagination-btn span {
+  color: #fff;
+}
+
+.hidden-form {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22rem;
+  display: grid;
+}
+
+.form-information {
+  backdrop-filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.new-flight {
+  background-color: #aaa;
+  border-radius: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 100rem;
+  padding: 5rem;
+  display: grid;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 1px 2px 3rem #868e96;
+}
+
+.hidden-form label {
+  font-size: 1.7rem;
+}
+
+.flight-form {
+  border: none;
+  border-radius: 22px;
+  outline: none;
+  width: 30rem;
+  margin-bottom: 2.2rem;
+  padding: 1.6rem 3.4rem;
+}
+
+.new-flight form input::placeholder {
+  opacity: .6;
+}
+
+.upload-btn {
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 2px;
+  background-color: #495057;
+  border: none;
+  border-radius: 22px;
+  width: 30rem;
+  margin-top: 1.2rem;
+  padding: 2.2rem 3.2rem;
+  font-weight: 500;
+  transition: all .4s;
+}
+
+.upload-btn:hover {
+  background-color: #adb5bd;
+}
+
+.spinner i {
+  justify-content: center;
+  margin-top: 10rem;
+  font-size: 5rem;
+  animation: 1s linear infinite spin;
+  display: flex;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (width <= 56em) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/*# sourceMappingURL=index.748ad148.css.map */
