@@ -72,10 +72,34 @@
             class="flight-image"
             />
           </div>
+         
           <div class="second-div">
-            <h2 class="paragraph"><strong>FLIGHT DETAILS</strong> 'FLIGHTNUMBER'</h2>
+            <h2 class="paragraph">FLIGHT DETAILS <span class="coleur">'FLIGHT NUMBER'</span></h2>
+            
             <div class="grid-container">
-              KAI TORA TI INE AFTO MORE
+              <div>
+                <h2>Origin</h2>
+                <p>From</p>
+                <p>$ORIGINFULLNAME(ORIGIN)</p>
+              </div>
+              <div class="departure">
+                <p>Departure Time</p>
+                <p>$DATE</p>
+              </div>
+            <div class="destination">
+                  <h2>Destination</h2>
+                  <p>To</p>
+                  <p>$DESTINATIONFULLNAME(DESTINATION)</p>
+                </div>
+                <div class="arrival">
+                  <p>Arrival Time</p>
+                  <p>$DATE</p>
+                </div>
+              <div class="flight-status">
+                <h2>Flight</h2>
+                <p>Status</p>
+                <p>$STATUS</p>
+              </div>
             </div>
           </div>
         </div>

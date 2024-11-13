@@ -296,6 +296,10 @@ input::placeholder {
 
 /* FLIGHT VIEW */
 
+.flight-div {
+  overflow: hidden;
+}
+
 .container-2 {
   overflow: hidden;
 }
@@ -304,11 +308,12 @@ input::placeholder {
   max-width: 100%;
   object-fit: cover;
   opacity: 60%;
-  overflow-x: hidden;
+  border-radius: 0 22px 0 0;
+  /* position: relative; */
 }
 
 .second-div {
-  max-width: 60rem;
+  max-width: 80rem;
   margin: 0 auto;
   box-shadow: 1px 2px 3rem #868e96;
   background-color: #fff;
@@ -322,5 +327,64 @@ input::placeholder {
   text-align: center;
   padding-top: 2rem;
   font-size: 2.2rem;
+  color: black;
+}
+
+.coleur {
   color: red;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 1.2rem;
+  column-gap: 1rem;
+}
+
+.departure {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+.destination {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+.arrival {
+  grid-row: 2/3;
+  grid-column: 2/3;
+}
+
+.grid-container h2 {
+  padding-bottom: 1.1rem;
+  opacity: 80%;
+  font-weight: 800;
+  font-size: 1.8rem;
+}
+
+.flight-status {
+  grid-row: 1/-1;
+}
+
+.grid-container p {
+  padding-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.text-img p {
+  font-size: 3rem;
+  color: red;
+  font-weight: bolder;
+}
+
+.text-img h2 {
+  color: #fff;
+  font-weight: bolder;
+}
+
+/* .text-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
