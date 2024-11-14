@@ -84,13 +84,56 @@ body {
   background-color: #adb5bd;
 }
 
-input {
-  padding: 1.6rem 3.4rem;
-  border-radius: 22px;
+.search {
+  background-color: #fff;
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  padding-left: 3rem;
+  transition: all 0.3s;
+  margin-top: 2rem;
+}
+
+.search:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 0.7rem 3rem rgba(#615551, 0.08);
+}
+
+.search__field {
   border: none;
-  margin-top: 2.4rem;
-  outline: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+  font-size: 1.7rem;
+  /* width: 30rem; */
   width: 100%;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.search__btn span {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.search__btn span i {
+  display: inline;
+}
+
+.search__btn {
+  font-weight: 600;
+  font-family: inherit;
+}
+
+input {
+  /* padding: 1.6rem 3.4rem; */
+  /* border-radius: 22px; */
+  border: none;
+  /* margin-top: 2.4rem; */
+  outline: none;
 }
 
 .btn {
@@ -99,11 +142,7 @@ input {
   background-color: #fbdb89;
   padding: 1.6rem 2.2rem;
   border-radius: 22px;
-  transform: translateX(-50%);
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #fff;
   font-weight: 600;
   transition: all 0.4s;
 }
@@ -178,6 +217,10 @@ input::placeholder {
   background-color: #ced4da;
 }
 
+/******************************/
+/* PAGINATION BUTTONS */
+/******************************/
+
 .pagination {
   padding: 2.2rem 1.2rem 0 1.2rem;
   display: flex;
@@ -203,7 +246,9 @@ input::placeholder {
   color: #fff;
 }
 
+/*********************************/
 /* FORM TO UPLOAD */
+/*********************************/
 
 .hidden-form {
   display: grid;
@@ -241,7 +286,7 @@ input::placeholder {
 .flight-form {
   padding: 1.6rem 3.4rem;
   border-radius: 22px;
-  margin-bottom: 2.2rem;
+  margin: 2rem 0;
   border: none;
   outline: none;
   width: 30rem;
@@ -274,7 +319,7 @@ input::placeholder {
   font-size: 5rem;
   display: flex;
   justify-content: center;
-  margin-top: 10rem;
+  margin-top: 7rem;
   animation: spin 1s linear infinite;
   opacity: 80%;
 }

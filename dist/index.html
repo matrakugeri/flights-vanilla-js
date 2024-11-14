@@ -14,27 +14,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="/index.748ad148.css" rel="stylesheet">
-
-  </head>
+    <script src="/index.e37f48ea.js" defer="">
+</script></head>
   <body>
     <div class="container">
       <div class="container-1">
         <div class="inner-container">
           <div class="heading">
-
             <h2 class="container-p">Flights</h2>
-          <button class="add-btn"><span>Add new  <i class="fa-solid fa-plane"></i></span></button>
+            <button class="add-btn">
+              <span>Add new <i class="fa-solid fa-plane"></i></span>
+            </button>
           </div>
-          <form>
-            <input type="text" placeholder="Search for flights" required="">
-            <!-- <button class="btn">Search</button> -->
+          <form class="search">
+            <input type="text" class="search__field" placeholder="Search">
+            <button class="btn search__btn">
+              <span>Search&nbsp;<i class="fas fa-search"></i></span>
+            </button>
           </form>
         </div>
         <ul class="search-results">
+          <!--
+          SEARCH-RESULTS VIEW 
           <li class="list-item">
             <a href="#" class="list-link">
             <div class="list-div">
-                <img src="/pexels-pixabay-358319.bea3cc21.jpg" alt="airplane" class="image">
+                <img
+                src="../pexels-pixabay-358319.jpg"
+                alt="airplane"
+                class="image"
+                />
               <div>
                 <p class="departure">04:45</p>
                 <p class="flight">UA820</p>
@@ -43,87 +52,132 @@
                 <h2 class="title">Rome to San Francisco</h2>
                 <p class="status">Status: Scheduled</p>
               </div>
-            </div></a>
-          </li>
+            </a>
+          </li> 
+          -->
         </ul>
+
+        <!-- 
+        PAGINATION VIEW
         <div class="pagination">
-          <button class="pagination-btn"><span>
-            Page 1
-          </span>
-        </button>
+          <button class="pagination-btn"><span> Page 1 </span></button>
           <button class="pagination-btn"><span>Page 2</span></button>
         </div>
+         -->
+      </div>
+      <div class="container-2">
+        <!--
+        FLIGHT-VIEW  
+        <div class="flight-div">
+          <img
+            src="../pexels-pixabay-358319.jpg"
+            alt="airplane"
+            class="flight-image"
+          />
         </div>
-        <div class="container-2">
-          <div class="flight-div">
-            <img src="/pexels-pixabay-358319.bea3cc21.jpg" alt="airplane" class="flight-image">
-          </div>
-         
-          <div class="second-div">
-            <h2 class="paragraph">FLIGHT DETAILS <span class="coleur">'FLIGHT NUMBER'</span></h2>
-            
-            <div class="grid-container">
-              <div>
-                <h2>Origin</h2>
-                <p>From</p>
-                <p>$ORIGINFULLNAME(ORIGIN)</p>
-              </div>
-              <div class="departure">
-                <p>Departure Time</p>
-                <p>$DATE</p>
-              </div>
+
+        <div class="second-div">
+          <h2 class="paragraph">
+            FLIGHT DETAILS <span class="coleur">'FLIGHT NUMBER'</span>
+          </h2>
+
+          <div class="grid-container">
+            <div>
+              <h2>Origin</h2>
+              <p>From</p>
+              <p>$ORIGINFULLNAME(ORIGIN)</p>
+            </div>
+            <div class="departure">
+              <p>Departure Time</p>
+              <p>$DATE</p>
+            </div>
             <div class="destination">
-                  <h2>Destination</h2>
-                  <p>To</p>
-                  <p>$DESTINATIONFULLNAME(DESTINATION)</p>
-                </div>
-                <div class="arrival">
-                  <p>Arrival Time</p>
-                  <p>$DATE</p>
-                </div>
-              <div class="flight-status">
-                <h2>Flight</h2>
-                <p>Status</p>
-                <p>$STATUS</p>
-              </div>
+              <h2>Destination</h2>
+              <p>To</p>
+              <p>$DESTINATIONFULLNAME(DESTINATION)</p>
+            </div>
+            <div class="arrival">
+              <p>Arrival Time</p>
+              <p>$DATE</p>
+            </div>
+            <div class="flight-status">
+              <h2>Flight</h2>
+              <p>Status</p>
+              <p>$STATUS</p>
             </div>
           </div>
         </div>
+         -->
       </div>
-      
-      <!--  SPINNER DIV
-        <div class="spinner hidden">
+    </div>
+
+    <!--  SPINNER DIV
+        <div class="spinner">
           <i class="fa-solid fa-spinner"></i>
         </div>
         -->
-      
-        <section class="form-information hidden">
-
-        <div class="new-flight">
-          <form action="#" class="hidden-form">
-            <div>
-              <label for="flight-number">Flight Number</label>
-              <input class="flight-form" type="text" id="flight-number" placeholder="UA820">
-              <label for="origin">Origin Name</label>
-              <input class="flight-form" type="text" id="origin" placeholder="Country">
-              <label for="destination">Destination Name</label>
-              <input class="flight-form" type="text" id="destination" placeholder="Country">
-              <label for="title">Title</label>
-              <input class="flight-form" type="text" id="title" placeholder="Rome to San Francisco">              
-            </div>
-            <div>
-              <label for="departure">Departure Time</label>
-              <input class="flight-form" type="text" id="departure" placeholder="04:45">
-              <label for="arrival">Arrival Time</label>
-              <input class="flight-form" type="text" id="arrival" placeholder="6:45">
-              <label for="status">Status</label>
-              <input class="flight-form" type="text" id="status" placeholder="Scheduled">
-              <button class="upload-btn">UPLOAD</button>
-            </div>
-          </form>
-        </div>
-          </section>
-
+    <!--
+    <section class="form-information">
+      <div class="new-flight">
+        <form action="#" class="hidden-form">
+          <div>
+            <label for="flight-number">Flight Number</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="flight-number"
+              placeholder="UA820"
+            />
+            <label for="origin">Origin Name</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="origin"
+              placeholder="Country"
+            />
+            <label for="destination">Destination Name</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="destination"
+              placeholder="Country"
+            />
+            <label for="title">Title</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="title"
+              placeholder="Rome to San Francisco"
+            />
+          </div>
+          <div>
+            <label for="departure">Departure Time</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="departure"
+              placeholder="04:45"
+            />
+            <label for="arrival">Arrival Time</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="arrival"
+              placeholder="6:45"
+            />
+            <label for="status">Status</label>
+            <input
+              class="flight-form"
+              type="text"
+              id="status"
+              placeholder="Scheduled"
+            />
+            <button class="upload-btn">UPLOAD</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    -->
     <!-- <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -132,5 +186,5 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script> -->
-  <script src="/flights-vanilla-js.59712999.js"></script></body>
+  </body>
 </html>

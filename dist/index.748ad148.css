@@ -68,20 +68,56 @@ body {
   background-color: #adb5bd;
 }
 
+.search {
+  background-color: #fff;
+  border-radius: 10rem;
+  align-items: center;
+  margin-top: 2rem;
+  padding-left: 3rem;
+  transition: all .3s;
+  display: flex;
+}
+
+.search:focus-within {
+  box-shadow: 0 .7rem 3rem rgba(#615551, .08);
+  transform: translateY(-2px);
+}
+
+.search__field {
+  color: inherit;
+  background: none;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.7rem;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.search__btn span {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.search__btn span i {
+  display: inline;
+}
+
+.search__btn {
+  font-family: inherit;
+  font-weight: 600;
+}
+
 input {
   border: none;
-  border-radius: 22px;
   outline: none;
-  width: 100%;
-  margin-top: 2.4rem;
-  padding: 1.6rem 3.4rem;
 }
 
 .btn {
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #fff;
   background-color: #fbdb89;
   border: none;
   border-radius: 22px;
@@ -89,7 +125,6 @@ input {
   font-weight: 600;
   transition: all .4s;
   display: inline-block;
-  transform: translateX(-50%);
 }
 
 .btn:hover {
@@ -205,7 +240,7 @@ input::placeholder {
   border-radius: 22px;
   outline: none;
   width: 30rem;
-  margin-bottom: 2.2rem;
+  margin: 2rem 0;
   padding: 1.6rem 3.4rem;
 }
 
@@ -234,7 +269,7 @@ input::placeholder {
 .spinner i {
   opacity: .8;
   justify-content: center;
-  margin-top: 10rem;
+  margin-top: 7rem;
   font-size: 5rem;
   animation: 1s linear infinite spin;
   display: flex;
