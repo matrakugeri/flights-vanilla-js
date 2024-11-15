@@ -12,11 +12,12 @@ export const state = {
 
 export const loadSearchResults = async function () {
   try {
-    const res = await fetch(`${API_URL}`);
+    const res = await fetch(`${API_URL}?_q=rome`);
     console.log(res);
     const data = await res.json();
     console.log(data);
     if (!res.ok) throw new Error(`Error`);
+    state.search.results = data;
   } catch (err) {
     console.error(err);
     throw err;
