@@ -540,8 +540,9 @@ var _resultsViewJs = require("./ResultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 const controlSearchResults = async function() {
     try {
-        // ResultsView.renderSpinner();
+        (0, _resultsViewJsDefault.default).renderSpinner();
         await _modelJs.loadSearchResults();
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
     }
@@ -565,11 +566,12 @@ const state = {
 };
 const loadSearchResults = async function() {
     try {
-        const res = await fetch(`${(0, _config.API_URL)}`);
+        const res = await fetch(`${(0, _config.API_URL)}?_q=rome`);
         console.log(res);
         const data = await res.json();
         console.log(data);
         if (!res.ok) throw new Error(`Error`);
+        state.search.results = data;
     } catch (err) {
         console.error(err);
         throw err;
@@ -623,6 +625,44 @@ class View {
     _clear() {
         this._parentEl.innerHTML = "";
     }
+    render(data) {
+        this._data = data;
+        // Define the formatTime function
+        const formatTime = (timeString)=>{
+            const date = new Date(timeString); // Convert to a Date object
+            return new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            }).format(date);
+        };
+        const markup = this._data.map((el)=>{
+            const formattedTime = formatTime(el.departureTime); // Format departureTime
+            return ` <li class="list-item">
+            <a href="${el.id}" class="list-link">
+            <div class="list-div">
+                <img
+                src="./pexels.pixabay"
+                alt="airplane"
+                class="image"
+                />
+              <div>
+                <p class="departure">${formattedTime}</p> <!-- Use formattedTime -->
+                <p class="flight">${el.flightNumber}</p>
+              </div>
+              <div>
+                <h2 class="title">${el.title}</h2>
+                <p class="status">Status: ${el.status}</p>
+              </div>
+            </a>
+          </li> `;
+        }).join("");
+        this._clear(); // Clear the parent element
+        this._parentEl.insertAdjacentHTML("afterbegin", markup); // Insert the new markup
+    }
     renderSpinner() {
         const markup = `<div class="spinner">
       <i class="fa-solid fa-spinner"></i>
@@ -641,6 +681,28 @@ var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class ResultsView extends (0, _viewJsDefault.default) {
     _data;
     _parentEl = document.querySelector(".search-results");
+    _generateMarkup() {
+        return `
+    <li class="list-item">
+            <a href="#" class="list-link">
+            <div class="list-div">
+                <img
+                src="../pexels-pixabay-358319.jpg"
+                alt="airplane"
+                class="image"
+                />
+              <div>
+                <p class="departure">04:45</p>
+                <p class="flight">UA820</p>
+              </div>
+              <div>
+                <h2 class="title">Rome to San Francisco</h2>
+                <p class="status">Status: Scheduled</p>
+              </div>
+            </a>
+          </li> 
+`;
+    }
 }
 exports.default = new ResultsView();
 
