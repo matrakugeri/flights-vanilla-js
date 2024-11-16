@@ -606,6 +606,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadFlight", ()=>loadFlight);
+parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 var _config = require("./config");
 const state = {
     flight: {},
@@ -640,6 +641,11 @@ const loadFlight = async function(id) {
         console.error(err);
         throw err;
     }
+};
+const loadSearchResults = async function(query) {
+    try {
+        const res = await fetch(`${(0, _config.API_URL)}/?${query}`);
+    } catch (err) {}
 }; // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
 
 },{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9bVj3":[function(require,module,exports) {
