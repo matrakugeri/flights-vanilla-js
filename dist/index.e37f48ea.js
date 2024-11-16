@@ -540,24 +540,15 @@ var _modelJs = require("./model.js");
 var _flightViewJs = require("./views/FlightView.js");
 var _flightViewJsDefault = parcelHelpers.interopDefault(_flightViewJs);
 var _config = require("./config");
-const flightContainer = document.querySelector(".container-2");
-const renderSpinner = function(parentEl) {
-    const markup = `
-  <div class="spinner">
-      <i class="fa-solid fa-spinner"></i>
-      </div>`;
-    parentEl.innerHTML = "";
-    parentEl.insertAdjacentHTML("afterbegin", markup);
-};
 const controlFlight = async function() {
     try {
         const id = window.location.hash.slice(1);
-        console.log(id);
         if (!id) return;
-        renderSpinner(flightContainer);
-        // 1) Loading recipe
+        // 0) Rendering spinner before asynchronous task is finished
+        (0, _flightViewJsDefault.default).renderSpinner();
+        // 1) Loading flight,and storing it to the state.flight object
         await _modelJs.loadFlight(id);
-        // 2) Rendering recipe
+        // 2) Rendering flight with the data stored in the state.
         (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
     } catch (err) {
         console.log(err);
@@ -687,9 +678,14 @@ class FlightView extends (0, _viewJsDefault.default) {
     }
     render(data) {
         this._data = data;
+        const markup = this._generateMarkup();
+        this._clear();
+        this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    }
+    _generateMarkup() {
         const departure = this.FormatData(this._data);
         const arrival = this.FormatArrival(this._data);
-        const markup = `
+        return `
     <div class="flight-div">
           <img
             src="https://i.imgur.com/5DmMjV9.jpeg"
@@ -706,32 +702,30 @@ class FlightView extends (0, _viewJsDefault.default) {
           <div class="grid-container">
             <div>
               <h2>Origin</h2>
-              <p>From</p>
+              <p class="lower">From</p>
               <p>${this._data.originFullName}(${this._data.origin})</p>
             </div>
             <div class="departure">
-              <p>Departure Time</p>
-              <p>${departure}</p>
+              <p class="lower">Departure Time</p>
+              <p class="bolder">${departure}</p>
             </div>
             <div class="destination">
               <h2>Destination</h2>
-              <p>To</p>
+              <p class="lower">To</p>
               <p>${this._data.destinationFullName}(${this._data.destination})</p>
             </div>
             <div class="arrival">
-              <p>Arrival Time</p>
-              <p>${arrival}</p>
+              <p class="lower">Arrival Time</p>
+              <p class="bolder">${arrival}</p>
             </div>
             <div class="flight-status">
               <h2>Flight</h2>
-              <p>Status</p>
+              <p class="lower">Status</p>
               <p>${this._data.status}</p>
             </div>
           </div>
         </div>
         `;
-        this._clear();
-        this._parentEl.insertAdjacentHTML("afterbegin", markup);
     }
 }
 exports.default = new FlightView();

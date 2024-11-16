@@ -33,9 +33,15 @@ class FlightView extends View {
 
   render(data) {
     this._data = data;
+    const markup = this._generateMarkup();
+    this._clear();
+    this._parentEl.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  _generateMarkup() {
     const departure = this.FormatData(this._data);
     const arrival = this.FormatArrival(this._data);
-    const markup = `
+    return `
     <div class="flight-div">
           <img
             src="https://i.imgur.com/5DmMjV9.jpeg"
@@ -52,32 +58,30 @@ class FlightView extends View {
           <div class="grid-container">
             <div>
               <h2>Origin</h2>
-              <p>From</p>
+              <p class="lower">From</p>
               <p>${this._data.originFullName}(${this._data.origin})</p>
             </div>
             <div class="departure">
-              <p>Departure Time</p>
-              <p>${departure}</p>
+              <p class="lower">Departure Time</p>
+              <p class="bolder">${departure}</p>
             </div>
             <div class="destination">
               <h2>Destination</h2>
-              <p>To</p>
+              <p class="lower">To</p>
               <p>${this._data.destinationFullName}(${this._data.destination})</p>
             </div>
             <div class="arrival">
-              <p>Arrival Time</p>
-              <p>${arrival}</p>
+              <p class="lower">Arrival Time</p>
+              <p class="bolder">${arrival}</p>
             </div>
             <div class="flight-status">
               <h2>Flight</h2>
-              <p>Status</p>
+              <p class="lower">Status</p>
               <p>${this._data.status}</p>
             </div>
           </div>
         </div>
         `;
-    this._clear();
-    this._parentEl.insertAdjacentHTML("afterbegin", markup);
   }
 }
 
