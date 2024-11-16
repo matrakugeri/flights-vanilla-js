@@ -1,7 +1,8 @@
-export default class View {
-  _clear() {
-    this._parentEl.innerHTML = "";
-  }
+import View from "./View.js";
+
+class ResultsView extends View {
+  _data;
+  _parentEl = document.querySelector(".search-results");
 
   render(data) {
     this._data = data;
@@ -27,7 +28,7 @@ export default class View {
             <a href="${el.id}" class="list-link">
             <div class="list-div">
                 <img
-                src="./pexels.pixabay"
+                src="./pexels.pixaba"
                 alt="airplane"
                 class="image"
                 />
@@ -48,11 +49,28 @@ export default class View {
     this._parentEl.insertAdjacentHTML("afterbegin", markup); // Insert the new markup
   }
 
-  renderSpinner() {
-    const markup = `<div class="spinner">
-      <i class="fa-solid fa-spinner"></i>
-      </div>`;
-    this._clear();
-    this._parentEl.insertAdjacentHTML("afterbegin", markup);
+  _generateMarkup() {
+    return `
+    <li class="list-item">
+            <a href="#" class="list-link">
+            <div class="list-div">
+                <img
+                src="img/pexels-pixabay-358319.jpg"
+                alt="airplane"
+                class="image"
+                />
+              <div>
+                <p class="departure">04:45</p>
+                <p class="flight">UA820</p>
+              </div>
+              <div>
+                <h2 class="title">Rome to San Francisco</h2>
+                <p class="status">Status: Scheduled</p>
+              </div>
+            </a>
+          </li> 
+`;
   }
 }
+
+export default new ResultsView();

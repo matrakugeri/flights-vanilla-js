@@ -10,16 +10,31 @@ export const state = {
   },
 };
 
-export const loadSearchResults = async function () {
+const query = document.querySelector(".search");
+
+export const loadFlight = async function (id) {
   try {
-    const res = await fetch(`${API_URL}?_q=rome`);
-    console.log(res);
+    const res = await fetch(`${API_URL}/${id}`);
     const data = await res.json();
+    if (!res.ok) throw new Error(`${data.message} ${res.status}`);
     console.log(data);
-    if (!res.ok) throw new Error(`Error`);
-    state.search.results = data;
+    let flight = data;
+    state.flight = {
+      id: flight.id,
+      arrival: flight.arrivalTime,
+      departure: flight.departureTime,
+      destination: flight.destination,
+      destinationFullName: flight.destinationFullName,
+      flightNumber: flight.flightNumber,
+      origin: flight.origin,
+      originFullName: flight.originFullName,
+      title: flight.title,
+      status: flight.status,
+    };
   } catch (err) {
     console.error(err);
     throw err;
   }
 };
+
+// await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
