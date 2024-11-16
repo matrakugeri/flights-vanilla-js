@@ -14,10 +14,10 @@ class ResultsView extends View {
     }).format(date);
     return formattedDate;
   }
-  render(data) {
-    this._data = data;
+
+  _generateMarkup() {
     const departure = this._FormatData(this._data);
-    const markup = `
+    return `
    <li class="list-item">
               <a href="#${this._data.id}" class="list-link">
             <div class="list-div">
@@ -36,6 +36,13 @@ class ResultsView extends View {
                   </div>
                   </a>
                   </li> `;
+  }
+
+  render(data) {
+    this._data = data;
+    const markup = this._generateMarkup();
+    this._clear();
+    this._parentEl.insertAdjacentHTML("afterbegin", markup);
   }
 }
 

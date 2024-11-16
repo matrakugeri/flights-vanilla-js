@@ -37,4 +37,10 @@ export const loadFlight = async function (id) {
   }
 };
 
+export const loadSearchResults = async function (query) {
+  try {
+    const res = await fetch(`${API_URL}/?${query}`);
+  } catch (err) {}
+};
+
 // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
