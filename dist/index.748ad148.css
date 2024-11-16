@@ -356,7 +356,7 @@ input::placeholder {
 
 .grid-container p {
   padding-bottom: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .text-img p {
@@ -368,6 +368,17 @@ input::placeholder {
 .text-img h2 {
   color: #fff;
   font-weight: bolder;
+}
+
+.bolder {
+  color: #122233;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.lower {
+  opacity: .85;
+  color: #000;
 }
 
 /*# sourceMappingURL=index.748ad148.css.map */
