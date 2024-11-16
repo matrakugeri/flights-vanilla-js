@@ -533,58 +533,50 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"aenu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+// import * as model from "./model.js";
+// import View from "./View.js";
+// import ResultsView from "./ResultsView.js";
 var _modelJs = require("./model.js");
-var _viewJs = require("./View.js");
-var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
-var _resultsViewJs = require("./ResultsView.js");
-var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
-const controlSearchResults = async function() {
+var _flightViewJs = require("./views/FlightView.js");
+var _flightViewJsDefault = parcelHelpers.interopDefault(_flightViewJs);
+var _config = require("./config");
+const flightContainer = document.querySelector(".container-2");
+const renderSpinner = function(parentEl) {
+    const markup = `
+  <div class="spinner">
+      <i class="fa-solid fa-spinner"></i>
+      </div>`;
+    parentEl.innerHTML = "";
+    parentEl.insertAdjacentHTML("afterbegin", markup);
+};
+const controlFlight = async function() {
     try {
-        (0, _resultsViewJsDefault.default).renderSpinner();
-        await _modelJs.loadSearchResults();
-        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+        const id = window.location.hash.slice(1);
+        console.log(id);
+        if (!id) return;
+        renderSpinner(flightContainer);
+        // 1) Loading recipe
+        await _modelJs.loadFlight(id);
+        // 2) Rendering recipe
+        (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
     } catch (err) {
         console.log(err);
     }
 };
-controlSearchResults();
+// controlSearchResults();
+[
+    "hashchange",
+    "load"
+].forEach((ev)=>window.addEventListener(ev, controlFlight)); // window.addEventListener("hashchange", controlSearchResults);
+ // window.addEventListener("load", controlSearchResults);
 
-},{"./model.js":"Y4A21","./View.js":"aNaCY","./ResultsView.js":"8wdn5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"Y4A21":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "state", ()=>state);
-parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
-var _config = require("./config");
-const state = {
-    flight: {},
-    search: {
-        query: "",
-        results: [],
-        resultsPerPage: (0, _config.RES_PER_PAGE),
-        page: 0
-    }
-};
-const loadSearchResults = async function() {
-    try {
-        const res = await fetch(`${(0, _config.API_URL)}?_q=rome`);
-        console.log(res);
-        const data = await res.json();
-        console.log(data);
-        if (!res.ok) throw new Error(`Error`);
-        state.search.results = data;
-    } catch (err) {
-        console.error(err);
-        throw err;
-    }
-};
-
-},{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
+},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
 parcelHelpers.export(exports, "key", ()=>key);
 parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
-const API_URL = "http://localhost:3000/flights";
+const API_URL = "http://localhost:3333/flights";
 const key = "?_start=10&_limit=10";
 const RES_PER_PAGE = 10;
 
@@ -618,50 +610,138 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"aNaCY":[function(require,module,exports) {
+},{}],"Y4A21":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "state", ()=>state);
+parcelHelpers.export(exports, "loadFlight", ()=>loadFlight);
+var _config = require("./config");
+const state = {
+    flight: {},
+    search: {
+        query: "",
+        results: [],
+        resultsPerPage: (0, _config.RES_PER_PAGE),
+        page: 0
+    }
+};
+const query = document.querySelector(".search");
+const loadFlight = async function(id) {
+    try {
+        const res = await fetch(`${(0, _config.API_URL)}/${id}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(`${data.message} ${res.status}`);
+        console.log(data);
+        let flight = data;
+        state.flight = {
+            id: flight.id,
+            arrival: flight.arrivalTime,
+            departure: flight.departureTime,
+            destination: flight.destination,
+            destinationFullName: flight.destinationFullName,
+            flightNumber: flight.flightNumber,
+            origin: flight.origin,
+            originFullName: flight.originFullName,
+            title: flight.title,
+            status: flight.status
+        };
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}; // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
+
+},{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9bVj3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class FlightView extends (0, _viewJsDefault.default) {
+    _parentEl = document.querySelector(".container-2");
+    _data;
+    FormatArrival(data) {
+        this._data = data;
+        const date = new Date(this._data.arrival);
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+        }).format(date);
+        return formattedDate;
+    }
+    FormatData(data) {
+        this._data = data;
+        const date = new Date(this._data.departure);
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+        }).format(date);
+        return formattedDate;
+    }
+    render(data) {
+        this._data = data;
+        const departure = this.FormatData(this._data);
+        const arrival = this.FormatArrival(this._data);
+        const markup = `
+    <div class="flight-div">
+          <img
+            src="https://i.imgur.com/5DmMjV9.jpeg"
+            alt="airplane"
+            class="flight-image"
+          />
+        </div>
+
+        <div class="second-div">
+          <h2 class="paragraph">
+            ${this._data.title} <span class="coleur">${this._data.flightNumber}</span>
+          </h2>
+
+          <div class="grid-container">
+            <div>
+              <h2>Origin</h2>
+              <p>From</p>
+              <p>${this._data.originFullName}(${this._data.origin})</p>
+            </div>
+            <div class="departure">
+              <p>Departure Time</p>
+              <p>${departure}</p>
+            </div>
+            <div class="destination">
+              <h2>Destination</h2>
+              <p>To</p>
+              <p>${this._data.destinationFullName}(${this._data.destination})</p>
+            </div>
+            <div class="arrival">
+              <p>Arrival Time</p>
+              <p>${arrival}</p>
+            </div>
+            <div class="flight-status">
+              <h2>Flight</h2>
+              <p>Status</p>
+              <p>${this._data.status}</p>
+            </div>
+          </div>
+        </div>
+        `;
+        this._clear();
+        this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    }
+}
+exports.default = new FlightView();
+
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5cUXS":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class View {
     _clear() {
         this._parentEl.innerHTML = "";
-    }
-    render(data) {
-        this._data = data;
-        // Define the formatTime function
-        const formatTime = (timeString)=>{
-            const date = new Date(timeString); // Convert to a Date object
-            return new Intl.DateTimeFormat("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true
-            }).format(date);
-        };
-        const markup = this._data.map((el)=>{
-            const formattedTime = formatTime(el.departureTime); // Format departureTime
-            return ` <li class="list-item">
-            <a href="${el.id}" class="list-link">
-            <div class="list-div">
-                <img
-                src="./pexels.pixabay"
-                alt="airplane"
-                class="image"
-                />
-              <div>
-                <p class="departure">${formattedTime}</p> <!-- Use formattedTime -->
-                <p class="flight">${el.flightNumber}</p>
-              </div>
-              <div>
-                <h2 class="title">${el.title}</h2>
-                <p class="status">Status: ${el.status}</p>
-              </div>
-            </a>
-          </li> `;
-        }).join("");
-        this._clear(); // Clear the parent element
-        this._parentEl.insertAdjacentHTML("afterbegin", markup); // Insert the new markup
     }
     renderSpinner() {
         const markup = `<div class="spinner">
@@ -673,39 +753,6 @@ class View {
 }
 exports.default = View;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8wdn5":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _viewJs = require("./View.js");
-var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
-class ResultsView extends (0, _viewJsDefault.default) {
-    _data;
-    _parentEl = document.querySelector(".search-results");
-    _generateMarkup() {
-        return `
-    <li class="list-item">
-            <a href="#" class="list-link">
-            <div class="list-div">
-                <img
-                src="../pexels-pixabay-358319.jpg"
-                alt="airplane"
-                class="image"
-                />
-              <div>
-                <p class="departure">04:45</p>
-                <p class="flight">UA820</p>
-              </div>
-              <div>
-                <h2 class="title">Rome to San Francisco</h2>
-                <p class="status">Status: Scheduled</p>
-              </div>
-            </a>
-          </li> 
-`;
-    }
-}
-exports.default = new ResultsView();
-
-},{"./View.js":"aNaCY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
 
 //# sourceMappingURL=index.e37f48ea.js.map
