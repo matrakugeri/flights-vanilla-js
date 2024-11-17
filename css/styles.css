@@ -164,6 +164,15 @@ input::placeholder {
   list-style: none;
 }
 
+.error {
+  padding: 3rem;
+  opacity: 75%;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #5e2828;
+  font-family: "Nunito sans";
+}
+
 .image {
   width: 9rem;
   height: 6rem;
@@ -360,8 +369,10 @@ input::placeholder {
 }
 
 .second-div {
-  max-width: 100rem;
-  /* margin: 0 auto; */
+  /* max-width: 80rem; */
+  max-width: 75rem;
+  margin: 0 auto;
+  max-height: 100%;
   box-shadow: 1px 2px 3rem #868e96;
   background-color: #fff;
 }
