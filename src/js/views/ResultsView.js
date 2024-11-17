@@ -5,8 +5,7 @@ class ResultsView extends View {
   _parentEl = document.querySelector(".search-results");
 
   _FormatData(data) {
-    this._data = data;
-    const date = new Date(this._data.departure);
+    const date = new Date(data.departure); // Use the provided data directly
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       hour: "numeric", // Include hour
       minute: "2-digit", // Include minutes
@@ -16,26 +15,31 @@ class ResultsView extends View {
   }
 
   _generateMarkup() {
-    const departure = this._FormatData(this._data);
-    return `
-   <li class="list-item">
-              <a href="#${this._data.id}" class="list-link">
-            <div class="list-div">
-              <img
-              src="https://i.imgur.com/5DmMjV9.jpeg"
-              alt="airplane"
-              class="image"
-              />
-              <div>
-                <p class="departure">04:45</p>
-                <p class="flight">${this._data.flightNumber}</p>
-                </div>
-                <div>
-                  <h2 class="title">${this._data.title}</h2>
-                  <p class="status">Status: ${this._data.status}</p>
-                  </div>
-                  </a>
-                  </li> `;
+    return this._data
+      .map((el) => {
+        const formattedDeparture = this._FormatData(el); // Format the departure time for each element
+        return `
+            <li class="list-item">
+                <a href="#${el.id}" class="list-link">
+                    <div class="list-div">
+                        <img
+                            src="https://i.imgur.com/5DmMjV9.jpeg"
+                            alt="airplane"
+                            class="image"
+                        />
+                        <div>
+                            <p class="departure">${formattedDeparture}</p> 
+                            <p class="flight">${el.flightNumber}</p>
+                        </div>
+                        <div>
+                            <h2 class="title">${el.title}</h2>
+                            <p class="status">Status: ${el.status}</p>
+                        </div>
+                    </div>
+                </a>
+            </li>`;
+      })
+      .join("");
   }
 
   render(data) {

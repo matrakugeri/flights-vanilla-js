@@ -540,6 +540,10 @@ var _modelJs = require("./model.js");
 var _flightViewJs = require("./views/FlightView.js");
 var _flightViewJsDefault = parcelHelpers.interopDefault(_flightViewJs);
 var _config = require("./config");
+var _resultsViewJs = require("./views/ResultsView.js");
+var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
+var _searchViewJs = require("./views/searchView.js");
+var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 const controlFlight = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -554,20 +558,37 @@ const controlFlight = async function() {
         console.log(err);
     }
 };
+const controlSearchResults = async function() {
+    try {
+        const query = (0, _searchViewJsDefault.default).getQuery();
+        if (!query) return;
+        // 0) Render the spinner before async task is finished
+        (0, _resultsViewJsDefault.default).renderSpinner();
+        // 1) Loading flights,and storing it to the search results in states
+        await _modelJs.loadSearchResults(query);
+        console.log(_modelJs.state.search.results);
+        // 2)Rendering flight with the data stored in the state.search.results
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+    } catch (err) {
+        console.log(err);
+    }
+};
+controlSearchResults();
 // controlSearchResults();
-[
-    "hashchange",
-    "load"
-].forEach((ev)=>window.addEventListener(ev, controlFlight)); // window.addEventListener("hashchange", controlSearchResults);
+const init = function() {
+    (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
+    (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
+};
+init(); // window.addEventListener("hashchange", controlSearchResults);
  // window.addEventListener("load", controlSearchResults);
 
-},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5Hzs":[function(require,module,exports) {
+},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
 parcelHelpers.export(exports, "key", ()=>key);
 parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
-const API_URL = "http://localhost:3333/flights";
+const API_URL = "http://localhost:3333/flights/";
 const key = "?_start=10&_limit=10";
 const RES_PER_PAGE = 10;
 
@@ -608,6 +629,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadFlight", ()=>loadFlight);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 var _config = require("./config");
+var _helpersJs = require("./helpers.js");
 const state = {
     flight: {},
     search: {
@@ -620,10 +642,7 @@ const state = {
 const query = document.querySelector(".search");
 const loadFlight = async function(id) {
     try {
-        const res = await fetch(`${(0, _config.API_URL)}/${id}`);
-        const data = await res.json();
-        if (!res.ok) throw new Error(`${data.message} ${res.status}`);
-        console.log(data);
+        const data = await (0, _helpersJs.getJSON)(`${(0, _config.API_URL)}${id}`);
         let flight = data;
         state.flight = {
             id: flight.id,
@@ -644,11 +663,43 @@ const loadFlight = async function(id) {
 };
 const loadSearchResults = async function(query) {
     try {
-        const res = await fetch(`${(0, _config.API_URL)}/?${query}`);
-    } catch (err) {}
+        state.search.query = query;
+        const data = await (0, _helpersJs.getJSON)(`${(0, _config.API_URL)}?q=${query}`);
+        state.search.results = data.map((el)=>{
+            return {
+                id: el.id,
+                arrival: el.arrivalTime,
+                departure: el.departureTime,
+                destination: el.destination,
+                destinationFullName: el.destinationFullName,
+                flightNumber: el.flightNumber,
+                origin: el.origin,
+                originFullName: el.originFullName,
+                title: el.title,
+                status: el.status
+            };
+        });
+    } catch (err) {
+        throw err;
+    }
 }; // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
 
-},{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9bVj3":[function(require,module,exports) {
+},{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helpers.js":"hGI1E"}],"hGI1E":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getJSON", ()=>getJSON);
+const getJSON = async function(url) {
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!res.ok) throw new Error(`${data.message} ${res.status}`);
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9bVj3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
@@ -733,6 +784,12 @@ class FlightView extends (0, _viewJsDefault.default) {
         </div>
         `;
     }
+    addHandlerRender(handler) {
+        [
+            "hashchange",
+            "load"
+        ].forEach((ev)=>window.addEventListener(ev, handler));
+    }
 }
 exports.default = new FlightView();
 
@@ -753,6 +810,81 @@ class View {
 }
 exports.default = View;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8JjiB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+class ResultsView extends (0, _viewJsDefault.default) {
+    _data;
+    _parentEl = document.querySelector(".search-results");
+    _FormatData(data) {
+        const date = new Date(data.departure); // Use the provided data directly
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            hour12: true
+        }).format(date);
+        return formattedDate;
+    }
+    _generateMarkup() {
+        return this._data.map((el)=>{
+            const formattedDeparture = this._FormatData(el); // Format the departure time for each element
+            return `
+            <li class="list-item">
+                <a href="#${el.id}" class="list-link">
+                    <div class="list-div">
+                        <img
+                            src="https://i.imgur.com/5DmMjV9.jpeg"
+                            alt="airplane"
+                            class="image"
+                        />
+                        <div>
+                            <p class="departure">${formattedDeparture}</p> 
+                            <p class="flight">${el.flightNumber}</p>
+                        </div>
+                        <div>
+                            <h2 class="title">${el.title}</h2>
+                            <p class="status">Status: ${el.status}</p>
+                        </div>
+                    </div>
+                </a>
+            </li>`;
+        }).join("");
+    }
+    render(data) {
+        this._data = data;
+        const markup = this._generateMarkup();
+        this._clear();
+        this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    }
+}
+exports.default = new ResultsView();
+
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9OQAM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class SearchView extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector(".search");
+    getQuery() {
+        const query = this._parentEl.querySelector(".search__field").value;
+        this._clearInput();
+        return query;
+    }
+    _clearInput() {
+        this._parentEl.querySelector(".search__field").value = "";
+    }
+    addHandlerSearch(handler) {
+        this._parentEl.addEventListener("submit", function(e) {
+            e.preventDefault();
+            handler();
+        });
+    }
+}
+exports.default = new SearchView();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./View":"5cUXS"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
 
 //# sourceMappingURL=index.e37f48ea.js.map

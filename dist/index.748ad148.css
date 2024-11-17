@@ -79,7 +79,7 @@ body {
 }
 
 .search:focus-within {
-  box-shadow: 0 .7rem 3rem rgba(#615551, .08);
+  box-shadow: 0 .7rem 3rem rgba(#4b3a35, .08);
   transform: translateY(-2px);
 }
 
@@ -144,8 +144,8 @@ input::placeholder {
 
 .image {
   filter: grayscale();
-  width: 12rem;
-  height: 8rem;
+  width: 9rem;
+  height: 6rem;
 }
 
 .list-div {
@@ -304,8 +304,7 @@ input::placeholder {
 
 .second-div {
   background-color: #fff;
-  max-width: 80rem;
-  margin: 0 auto;
+  max-width: 100rem;
   box-shadow: 1px 2px 3rem #868e96;
 }
 
