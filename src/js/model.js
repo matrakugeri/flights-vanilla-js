@@ -1,5 +1,5 @@
 import { API_URL, key, RES_PER_PAGE } from "./config";
-
+import { getJSON } from "./helpers.js";
 export const state = {
   flight: {},
   search: {
@@ -14,10 +14,7 @@ const query = document.querySelector(".search");
 
 export const loadFlight = async function (id) {
   try {
-    const res = await fetch(`${API_URL}/${id}`);
-    const data = await res.json();
-    if (!res.ok) throw new Error(`${data.message} ${res.status}`);
-    console.log(data);
+    const data = await getJSON(`${API_URL}${id}`);
     let flight = data;
     state.flight = {
       id: flight.id,
@@ -39,8 +36,25 @@ export const loadFlight = async function (id) {
 
 export const loadSearchResults = async function (query) {
   try {
-    const res = await fetch(`${API_URL}/?${query}`);
-  } catch (err) {}
+    state.search.query = query;
+    const data = await getJSON(`${API_URL}?q=${query}`);
+    state.search.results = data.map((el) => {
+      return {
+        id: el.id,
+        arrival: el.arrivalTime,
+        departure: el.departureTime,
+        destination: el.destination,
+        destinationFullName: el.destinationFullName,
+        flightNumber: el.flightNumber,
+        origin: el.origin,
+        originFullName: el.originFullName,
+        title: el.title,
+        status: el.status,
+      };
+    });
+  } catch (err) {
+    throw err;
+  }
 };
 
 // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
