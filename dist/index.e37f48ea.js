@@ -573,14 +573,11 @@ const controlSearchResults = async function() {
         console.log(err);
     }
 };
-controlSearchResults();
-// controlSearchResults();
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
 };
-init(); // window.addEventListener("hashchange", controlSearchResults);
- // window.addEventListener("load", controlSearchResults);
+init();
 
 },{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -800,6 +797,15 @@ class View {
     _clear() {
         this._parentEl.innerHTML = "";
     }
+    renderError() {
+        const markup = `
+  <div class="error">
+              <p>No flight founded for your query!<br />Please try again!</p>
+            </div>
+    `;
+        this._clear();
+        this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    }
     renderSpinner() {
         const markup = `<div class="spinner">
       <i class="fa-solid fa-spinner"></i>
@@ -853,9 +859,10 @@ class ResultsView extends (0, _viewJsDefault.default) {
         }).join("");
     }
     render(data) {
+        if (data.length === 0) return this.renderError();
         this._data = data;
-        const markup = this._generateMarkup();
         this._clear();
+        const markup = this._generateMarkup();
         this._parentEl.insertAdjacentHTML("afterbegin", markup);
     }
 }

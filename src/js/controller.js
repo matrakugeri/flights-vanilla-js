@@ -43,15 +43,8 @@ const controlSearchResults = async function () {
   }
 };
 
-controlSearchResults();
-
-// controlSearchResults();
-
 const init = function () {
   FlightView.addHandlerRender(controlFlight);
   searchView.addHandlerSearch(controlSearchResults);
 };
 init();
-
-// window.addEventListener("hashchange", controlSearchResults);
-// window.addEventListener("load", controlSearchResults);
