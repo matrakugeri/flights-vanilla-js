@@ -636,7 +636,6 @@ const state = {
         page: 0
     }
 };
-const query = document.querySelector(".search");
 const loadFlight = async function(id) {
     try {
         const data = await (0, _helpersJs.getJSON)(`${(0, _config.API_URL)}${id}`);
@@ -730,12 +729,6 @@ class FlightView extends (0, _viewJsDefault.default) {
         }).format(date);
         return formattedDate;
     }
-    render(data) {
-        this._data = data;
-        const markup = this._generateMarkup();
-        this._clear();
-        this._parentEl.insertAdjacentHTML("afterbegin", markup);
-    }
     _generateMarkup() {
         const departure = this.FormatData(this._data);
         const arrival = this.FormatArrival(this._data);
@@ -794,6 +787,13 @@ exports.default = new FlightView();
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class View {
+    render(data) {
+        if (data.length === 0) return this.renderError();
+        this._data = data;
+        const markup = this._generateMarkup();
+        this._clear();
+        this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    }
     _clear() {
         this._parentEl.innerHTML = "";
     }
@@ -857,13 +857,6 @@ class ResultsView extends (0, _viewJsDefault.default) {
                 </a>
             </li>`;
         }).join("");
-    }
-    render(data) {
-        if (data.length === 0) return this.renderError();
-        this._data = data;
-        this._clear();
-        const markup = this._generateMarkup();
-        this._parentEl.insertAdjacentHTML("afterbegin", markup);
     }
 }
 exports.default = new ResultsView();
