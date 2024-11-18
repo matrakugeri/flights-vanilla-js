@@ -28,7 +28,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .container {
@@ -291,6 +291,13 @@ input::placeholder {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.pos {
+  position: absolute;
+  top: 12;
+  right: 22;
+  font-size: 2.4rem;
+}
+
 .hidden-form label {
   font-size: 1.7rem;
 }
@@ -375,6 +382,7 @@ input::placeholder {
   max-height: 100%;
   box-shadow: 1px 2px 3rem #868e96;
   background-color: #fff;
+  /* transform: translateY(-20px); */
 }
 
 .grid-container {
