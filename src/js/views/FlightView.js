@@ -31,13 +31,6 @@ class FlightView extends View {
     return formattedDate;
   }
 
-  render(data) {
-    this._data = data;
-    const markup = this._generateMarkup();
-    this._clear();
-    this._parentEl.insertAdjacentHTML("afterbegin", markup);
-  }
-
   _generateMarkup() {
     const departure = this.FormatData(this._data);
     const arrival = this.FormatArrival(this._data);

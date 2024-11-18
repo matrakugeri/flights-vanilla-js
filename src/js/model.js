@@ -10,7 +10,7 @@ export const state = {
   },
 };
 
-const query = document.querySelector(".search");
+// const query = document.querySelector(".search");
 
 export const loadFlight = async function (id) {
   try {
