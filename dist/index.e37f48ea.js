@@ -544,6 +544,11 @@ var _resultsViewJs = require("./views/ResultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
+var _addRecipeViewJs = require("./views/addRecipeView.js");
+var _addRecipeViewJsDefault = parcelHelpers.interopDefault(_addRecipeViewJs);
+// ......
+var _paginationViewJs = require("./views/paginationView.js");
+var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 const controlFlight = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -573,13 +578,29 @@ const controlSearchResults = async function() {
         console.log(err);
     }
 };
+const controlAddRecipe = function(newRecipe) {
+    console.log(newRecipe);
+// Upload the new recipe data
+};
+// .................
+// const controlPagination = function (goToPage) {
+//   // 1) Load new page results
+//   model.loadSearchResults(model.state.search.query, goToPage);
+//   // 2) Render new results
+//   ResultsView.render(model.state.search.results);
+//   // 3) Update pagination buttons
+//   PaginationView.render(model.state.search);
+// };
+// // ......
+// PaginationView.addHandlerClick(controlPagination);
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
+    (0, _addRecipeViewJsDefault.default)._addHandlerUpload(controlAddRecipe);
 };
 init();
 
-},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM"}],"k5Hzs":[function(require,module,exports) {
+},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/addRecipeView.js":"i6DNj","./views/paginationView.js":"6z7bi"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -884,6 +905,101 @@ class SearchView extends (0, _viewDefault.default) {
     }
 }
 exports.default = new SearchView();
+
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i6DNj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class addRecipeView extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector(".hidden-form");
+    _window = document.querySelector(".new-flight");
+    _overlay = document.querySelector(".form-information");
+    _btnOpen = document.querySelector(".add-btn");
+    _btnClose = document.querySelector(".pos");
+    constructor(){
+        super();
+        this._addHandlerShowWindow();
+        this._addHandlerCloseWindow();
+    }
+    toggleWindow() {
+        this._overlay.classList.toggle("hidden");
+        this._window.classList.toggle("hidden");
+    }
+    _addHandlerShowWindow() {
+        this._btnOpen.addEventListener("click", this.toggleWindow.bind(this));
+    }
+    _addHandlerCloseWindow() {
+        this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
+        this._overlay.addEventListener("click", this.toggleWindow.bind(this));
+    }
+    _addHandlerUpload(handler) {
+        this._parentEl.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const dataArr = [
+                ...new FormData(this)
+            ];
+            const data = Object.fromEntries(dataArr);
+            handler(data);
+        });
+    }
+    _generateMarkup() {}
+}
+exports.default = new addRecipeView();
+
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6z7bi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class PaginationView extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector(".pagination");
+    addHandlerClick(handler) {
+        this._parentEl.addEventListener("click", function(e) {
+            const btn = e.target.closest(".pagination-btn");
+            if (!btn) return;
+            const goToPage = +btn.dataset.goto;
+            handler(goToPage);
+        });
+    }
+    _generateMarkup() {
+        const currentPage = this._data.page; // Current page
+        const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage); // Total pages
+        if (currentPage === 1 && numPages > 1) // Page 1, and other pages exist
+        return `
+          <button data-goto="${currentPage + 1}" class="pagination-btn">
+            <span>Page ${currentPage + 1} <i class="fa-solid fa-arrow-right"></i></span>
+          </button>
+        `;
+        if (currentPage === numPages && numPages > 1) // Last page
+        return `
+          <button data-goto="${currentPage - 1}" class="pagination-btn">
+            <span><i class="fa-solid fa-arrow-left"></i> Page ${currentPage - 1}</span>
+          </button>
+        `;
+        if (currentPage < numPages) // Other pages
+        return `
+          <button data-goto="${currentPage - 1}" class="pagination-btn">
+            <span><i class="fa-solid fa-arrow-left"></i> Page ${currentPage - 1}</span>
+          </button>
+          <button data-goto="${currentPage + 1}" class="pagination-btn">
+            <span>Page ${currentPage + 1} <i class="fa-solid fa-arrow-right"></i></span>
+          </button>
+        `;
+        // Page 1, and no other pages exist
+        return "";
+    }
+}
+exports.default = new PaginationView(); // class PaginationView extends View {
+ //   _parentEl = document.querySelector(".pagination");
+ //   _generateMarkup() {
+ //     // Page 1 and there are other pages
+ //     // Page 1 , and there are NO other pages
+ //     // Last page
+ //     // Other page
+ //   }
+ // }
+ // export default new PaginationView();
 
 },{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
 

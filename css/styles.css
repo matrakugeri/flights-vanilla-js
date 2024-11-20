@@ -293,6 +293,7 @@ input::placeholder {
 
 .pos {
   position: absolute;
+  cursor: pointer;
   top: 12;
   right: 22;
   font-size: 2.4rem;
@@ -308,6 +309,8 @@ input::placeholder {
   border: none;
   outline: none;
   width: 30rem;
+  font-size: 1.6rem;
+  font-style: italic;
 }
 
 .new-flight form input::placeholder {
