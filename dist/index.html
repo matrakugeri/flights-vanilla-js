@@ -130,27 +130,25 @@
 
     <section class="form-information hidden"></section>
     <div class="new-flight hidden">
-      <div class="pos">
-        <i class="fa-solid fa-xmark"></i>
-      </div>
+      <i class="fa-solid fa-xmark pos"></i>
       <form class="hidden-form">
         <div>
           <label for="flight-number">Flight Number</label>
-          <input class="flight-form" type="text" id="flight-number" placeholder="UA820">
+          <input class="flight-form" type="text" id="flight-number" placeholder="UA820" value="UA820" required="" name="flight-number">
           <label for="origin">Origin Name</label>
-          <input class="flight-form" type="text" id="origin" placeholder="Country">
+          <input class="flight-form" type="text" id="origin" placeholder="Country" value="Athens" required="" name="origin">
           <label for="destination">Destination Name</label>
-          <input class="flight-form" type="text" id="destination" placeholder="Country">
+          <input class="flight-form" type="text" id="destination" placeholder="Country" value="Austria" required="" name="destination">
           <label for="title">Title</label>
-          <input class="flight-form" type="text" id="title" placeholder="Rome to San Francisco">
+          <input class="flight-form" type="text" id="title" placeholder="Rome to San Francisco" value="Athens to Austria" required="" name="title">
         </div>
         <div>
           <label for="departure">Departure Time</label>
-          <input class="flight-form" type="text" id="departure" placeholder="04:45">
+          <input class="flight-form" type="text" id="departure" placeholder="04:45" value="04:45" required="" name="departure">
           <label for="arrival">Arrival Time</label>
-          <input class="flight-form" type="text" id="arrival" placeholder="6:45">
+          <input class="flight-form" type="text" id="arrival" placeholder="6:45" value="6:45" required="" name="arrival">
           <label for="status">Status</label>
-          <input class="flight-form" type="text" id="status" placeholder="Scheduled">
+          <input class="flight-form" type="text" id="status" placeholder="Scheduled" value="Scheduled" required="" name="status">
           <button class="upload-btn">UPLOAD</button>
         </div>
       </form>
