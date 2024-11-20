@@ -212,8 +212,8 @@ input::placeholder {
 }
 
 .hidden-form {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7rem;
   display: grid;
 }
 
@@ -229,8 +229,7 @@ input::placeholder {
 .new-flight {
   background-color: #aaa;
   border-radius: 22px;
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 100rem;
+  grid-template-columns: repeat(3, 1fr);
   padding: 5rem;
   display: grid;
   position: fixed;

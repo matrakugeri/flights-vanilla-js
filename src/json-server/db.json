@@ -25,18 +25,6 @@
       "title": "San Francisco to Atlanta"
     },
     {
-      "id": 3,
-      "flightNumber": "WN970",
-      "origin": "SFO",
-      "originFullName": "San Francisco",
-      "destination": "JFK",
-      "destinationFullName": "New York",
-      "departureTime": "2024-12-11T07:45:18.923482",
-      "arrivalTime": "2024-12-11T13:45:18.923482",
-      "status": "Delayed",
-      "title": "San Francisco to New York"
-    },
-    {
       "id": 4,
       "flightNumber": "UA873",
       "origin": "ATL",
@@ -239,6 +227,66 @@
       "arrivalTime": "2024-12-07T09:45:18.923482",
       "status": "Cancelled",
       "title": "Paris to Rome"
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Albania",
+      "title": "Albania to Vienna",
+      "status": "Scheduled",
+      "id": 21
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 22
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 23
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Alabn to kalol",
+      "status": "Scheduled",
+      "id": 24
+    },
+    {
+      "arrivalTime": "2024-06-07T02:15",
+      "departureTime": "2024-11-14T00:50",
+      "destination": "VIE",
+      "destinationFullName": "Vienna",
+      "flightNumber": "WIZZ2",
+      "origin": "ALB",
+      "originFullName": "Albania",
+      "title": "Albania to Vienna",
+      "status": "Scheduled",
+      "id": 25
     }
   ]
 }

@@ -45,10 +45,18 @@ const controlSearchResults = async function () {
   }
 };
 
-const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
+const controlAddFlight = async function (newFlight) {
+  try {
+    //Spinner before loading
+    FlightView.renderSpinner();
+    // Loading flight and store it to the state.flight
+    await model.uploadFlight(newFlight);
 
-  // Upload the new recipe data
+    //
+    FlightView.render(model.state.flight);
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 // .................
@@ -68,6 +76,6 @@ const controlAddRecipe = function (newRecipe) {
 const init = function () {
   FlightView.addHandlerRender(controlFlight);
   searchView.addHandlerSearch(controlSearchResults);
-  addRecipeView._addHandlerUpload(controlAddRecipe);
+  addRecipeView.addHandlerUpload(controlAddFlight);
 };
 init();

@@ -134,19 +134,25 @@
       <form class="hidden-form">
         <div>
           <label for="flight-number">Flight Number</label>
-          <input class="flight-form" type="text" id="flight-number" placeholder="UA820" value="UA820" required="" name="flight-number">
+          <input class="flight-form" type="text" id="flight-number" placeholder="UA820" value="UA820" required="" name="flightNumber">
           <label for="origin">Origin Name</label>
-          <input class="flight-form" type="text" id="origin" placeholder="Country" value="Athens" required="" name="origin">
+          <input class="flight-form" type="text" id="origin" placeholder="Country" value="ATH" required="" name="origin">
+          <label for="origin">Origin Fullname</label>
+          <input class="flight-form" type="text" id="origin" placeholder="Country" value="Athens" required="" name="originFullName">
+        </div>
+        <div>
           <label for="destination">Destination Name</label>
-          <input class="flight-form" type="text" id="destination" placeholder="Country" value="Austria" required="" name="destination">
+          <input class="flight-form" type="text" id="destination" placeholder="Country" value="VIE" required="" name="destination">
+          <label for="destination">Destination Fullname</label>
+          <input class="flight-form" type="text" id="destination" placeholder="Country" value="Austria" required="" name="destinationFullName">
           <label for="title">Title</label>
-          <input class="flight-form" type="text" id="title" placeholder="Rome to San Francisco" value="Athens to Austria" required="" name="title">
+          <input class="flight-form" type="text" id="title" placeholder="Rome to San Francisco" value="Athens to Vienna" required="" name="title">
         </div>
         <div>
           <label for="departure">Departure Time</label>
-          <input class="flight-form" type="text" id="departure" placeholder="04:45" value="04:45" required="" name="departure">
+          <input class="flight-form" type="datetime-local" id="departure" value="2024-11-24T18:45" required="" name="departure">
           <label for="arrival">Arrival Time</label>
-          <input class="flight-form" type="text" id="arrival" placeholder="6:45" value="6:45" required="" name="arrival">
+          <input class="flight-form" type="datetime-local" id="arrival" value="2024-11-25T12:15" required="" name="arrival">
           <label for="status">Status</label>
           <input class="flight-form" type="text" id="status" placeholder="Scheduled" value="Scheduled" required="" name="status">
           <button class="upload-btn">UPLOAD</button>

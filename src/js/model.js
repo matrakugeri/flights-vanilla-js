@@ -1,5 +1,5 @@
 import { API_URL, key, RES_PER_PAGE } from "./config";
-import { getJSON } from "./helpers.js";
+import { getJSON, sendJSON } from "./helpers.js";
 export const state = {
   flight: {},
   search: {
@@ -18,8 +18,8 @@ export const loadFlight = async function (id) {
     let flight = data;
     state.flight = {
       id: flight.id,
-      arrival: flight.arrivalTime,
-      departure: flight.departureTime,
+      arrivalTime: flight.arrivalTime,
+      departureTime: flight.departureTime,
       destination: flight.destination,
       destinationFullName: flight.destinationFullName,
       flightNumber: flight.flightNumber,
@@ -41,8 +41,8 @@ export const loadSearchResults = async function (query) {
     state.search.results = data.map((el) => {
       return {
         id: el.id,
-        arrival: el.arrivalTime,
-        departure: el.departureTime,
+        arrivalTime: el.arrivalTime,
+        departureTime: el.departureTime,
         destination: el.destination,
         destinationFullName: el.destinationFullName,
         flightNumber: el.flightNumber,
@@ -54,6 +54,29 @@ export const loadSearchResults = async function (query) {
     });
   } catch (err) {
     throw err;
+  }
+};
+
+export const uploadFlight = async function (newFlight) {
+  try {
+    //
+    const flight = {
+      arrivalTime: newFlight.arrival,
+      departureTime: newFlight.departure,
+      destination: newFlight.destination,
+      destinationFullName: newFlight.destinationFullName,
+      flightNumber: newFlight.flightNumber,
+      origin: newFlight.origin,
+      originFullName: newFlight.originFullName,
+      title: newFlight.title,
+      status: newFlight.status,
+    };
+    const data = await sendJSON(`${API_URL}`, flight);
+    state.flight = data;
+    console.log(data);
+    console.log(state.flight);
+  } catch (err) {
+    console.error(err);
   }
 };
 

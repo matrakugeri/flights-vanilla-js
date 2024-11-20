@@ -5,7 +5,7 @@ class FlightView extends View {
 
   FormatArrival(data) {
     this._data = data;
-    const date = new Date(this._data.arrival);
+    const date = new Date(this._data.arrivalTime);
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       month: "long", // Full month name (e.g., "November")
       day: "numeric", // Day of the month (e.g., "15")
@@ -19,7 +19,7 @@ class FlightView extends View {
 
   FormatData(data) {
     this._data = data;
-    const date = new Date(this._data.departure);
+    const date = new Date(this._data.departureTime);
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       month: "long", // Full month name (e.g., "November")
       day: "numeric", // Day of the month (e.g., "15")

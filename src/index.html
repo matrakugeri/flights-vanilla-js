@@ -152,7 +152,7 @@
             placeholder="UA820"
             value="UA820"
             required
-            name="flight-number"
+            name="flightNumber"
           />
           <label for="origin">Origin Name</label>
           <input
@@ -160,11 +160,33 @@
             type="text"
             id="origin"
             placeholder="Country"
-            value="Athens"
+            value="ATH"
             required
             name="origin"
           />
+          <label for="origin">Origin Fullname</label>
+          <input
+            class="flight-form"
+            type="text"
+            id="origin"
+            placeholder="Country"
+            value="Athens"
+            required
+            name="originFullName"
+          />
+        </div>
+        <div>
           <label for="destination">Destination Name</label>
+          <input
+            class="flight-form"
+            type="text"
+            id="destination"
+            placeholder="Country"
+            value="VIE"
+            required
+            name="destination"
+          />
+          <label for="destination">Destination Fullname</label>
           <input
             class="flight-form"
             type="text"
@@ -172,7 +194,7 @@
             placeholder="Country"
             value="Austria"
             required
-            name="destination"
+            name="destinationFullName"
           />
           <label for="title">Title</label>
           <input
@@ -180,7 +202,7 @@
             type="text"
             id="title"
             placeholder="Rome to San Francisco"
-            value="Athens to Austria"
+            value="Athens to Vienna"
             required
             name="title"
           />
@@ -189,20 +211,18 @@
           <label for="departure">Departure Time</label>
           <input
             class="flight-form"
-            type="text"
+            type="datetime-local"
             id="departure"
-            placeholder="04:45"
-            value="04:45"
+            value="2024-11-24T18:45"
             required
             name="departure"
           />
           <label for="arrival">Arrival Time</label>
           <input
             class="flight-form"
-            type="text"
+            type="datetime-local"
             id="arrival"
-            placeholder="6:45"
-            value="6:45"
+            value="2024-11-25T12:15"
             required
             name="arrival"
           />
