@@ -3,10 +3,10 @@
 // import ResultsView from "./ResultsView.js";
 import * as model from "./model.js";
 import FlightView from "./views/FlightView.js";
-import { API_URL } from "./config";
+import { API_URL, MODAL_SEC } from "./config";
 import ResultsView from "./views/ResultsView.js";
 import searchView from "./views/searchView.js";
-import addRecipeView from "./views/addRecipeView.js";
+import addFlightView from "./views/addFlightView.js";
 // ......
 import PaginationView from "./views/paginationView.js";
 const controlFlight = async function () {
@@ -52,8 +52,16 @@ const controlAddFlight = async function (newFlight) {
     // Loading flight and store it to the state.flight
     await model.uploadFlight(newFlight);
 
-    //
+    // Rendering the flight with the data stored in state
     FlightView.render(model.state.flight);
+
+    // Change the window history pushstate
+    window.history.pushState(null, "", `#${model.state.flight.id}`);
+
+    // Hide modal after uploading
+    setTimeout(function () {
+      addFlightView.toggleWindow();
+    }, MODAL_SEC * 700);
   } catch (err) {
     console.error(err);
   }
@@ -76,6 +84,6 @@ const controlAddFlight = async function (newFlight) {
 const init = function () {
   FlightView.addHandlerRender(controlFlight);
   searchView.addHandlerSearch(controlSearchResults);
-  addRecipeView.addHandlerUpload(controlAddFlight);
+  addFlightView.addHandlerUpload(controlAddFlight);
 };
 init();

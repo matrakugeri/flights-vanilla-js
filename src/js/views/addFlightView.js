@@ -1,6 +1,6 @@
 import View from "./View";
 
-class addRecipeView extends View {
+class addFlightView extends View {
   _parentEl = document.querySelector(".hidden-form");
 
   _window = document.querySelector(".new-flight");
@@ -29,6 +29,11 @@ class addRecipeView extends View {
     this._overlay.addEventListener("click", this.toggleWindow.bind(this));
   }
 
+  //   addHandlerRemoveWindow() {
+  //     this._overlay.classList.add(".hidden");
+  //     this._window.classList.add(".hidden");
+  //   }
+
   addHandlerUpload(handler) {
     this._parentEl.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -40,4 +45,4 @@ class addRecipeView extends View {
   }
 }
 
-export default new addRecipeView();
+export default new addFlightView();

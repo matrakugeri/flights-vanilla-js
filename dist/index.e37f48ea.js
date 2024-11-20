@@ -544,8 +544,8 @@ var _resultsViewJs = require("./views/ResultsView.js");
 var _resultsViewJsDefault = parcelHelpers.interopDefault(_resultsViewJs);
 var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
-var _addRecipeViewJs = require("./views/addRecipeView.js");
-var _addRecipeViewJsDefault = parcelHelpers.interopDefault(_addRecipeViewJs);
+var _addFlightViewJs = require("./views/addFlightView.js");
+var _addFlightViewJsDefault = parcelHelpers.interopDefault(_addFlightViewJs);
 // ......
 var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
@@ -584,8 +584,14 @@ const controlAddFlight = async function(newFlight) {
         (0, _flightViewJsDefault.default).renderSpinner();
         // Loading flight and store it to the state.flight
         await _modelJs.uploadFlight(newFlight);
-        //
+        // Rendering the flight with the data stored in state
         (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
+        // Change the window history pushstate
+        window.history.pushState(null, "", `#${_modelJs.state.flight.id}`);
+        // Hide modal after uploading
+        setTimeout(function() {
+            (0, _addFlightViewJsDefault.default).toggleWindow();
+        }, (0, _config.MODAL_SEC) * 700);
     } catch (err) {
         console.error(err);
     }
@@ -604,19 +610,21 @@ const controlAddFlight = async function(newFlight) {
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
-    (0, _addRecipeViewJsDefault.default).addHandlerUpload(controlAddFlight);
+    (0, _addFlightViewJsDefault.default).addHandlerUpload(controlAddFlight);
 };
 init();
 
-},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/addRecipeView.js":"i6DNj","./views/paginationView.js":"6z7bi"}],"k5Hzs":[function(require,module,exports) {
+},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/paginationView.js":"6z7bi","./views/addFlightView.js":"BUVwN"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
 parcelHelpers.export(exports, "key", ()=>key);
 parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
+parcelHelpers.export(exports, "MODAL_SEC", ()=>MODAL_SEC);
 const API_URL = "http://localhost:3333/flights/";
 const key = "?_start=10&_limit=10";
 const RES_PER_PAGE = 10;
+const MODAL_SEC = 1;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -958,47 +966,6 @@ class SearchView extends (0, _viewDefault.default) {
 }
 exports.default = new SearchView();
 
-},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i6DNj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _view = require("./View");
-var _viewDefault = parcelHelpers.interopDefault(_view);
-class addRecipeView extends (0, _viewDefault.default) {
-    _parentEl = document.querySelector(".hidden-form");
-    _window = document.querySelector(".new-flight");
-    _overlay = document.querySelector(".form-information");
-    _btnOpen = document.querySelector(".add-btn");
-    _btnClose = document.querySelector(".pos");
-    constructor(){
-        super();
-        this._addHandlerShowWindow();
-        this._addHandlerCloseWindow();
-    }
-    toggleWindow() {
-        this._overlay.classList.toggle("hidden");
-        this._window.classList.toggle("hidden");
-    }
-    _addHandlerShowWindow() {
-        this._btnOpen.addEventListener("click", this.toggleWindow.bind(this));
-    }
-    _addHandlerCloseWindow() {
-        this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
-        this._overlay.addEventListener("click", this.toggleWindow.bind(this));
-    }
-    addHandlerUpload(handler) {
-        this._parentEl.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const dataArr = [
-                ...new FormData(this)
-            ];
-            const data = Object.fromEntries(dataArr);
-            console.log(data);
-            handler(data);
-        });
-    }
-}
-exports.default = new addRecipeView();
-
 },{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6z7bi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -1052,6 +1019,51 @@ exports.default = new PaginationView(); // class PaginationView extends View {
  //   }
  // }
  // export default new PaginationView();
+
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BUVwN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class addFlightView extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector(".hidden-form");
+    _window = document.querySelector(".new-flight");
+    _overlay = document.querySelector(".form-information");
+    _btnOpen = document.querySelector(".add-btn");
+    _btnClose = document.querySelector(".pos");
+    constructor(){
+        super();
+        this._addHandlerShowWindow();
+        this._addHandlerCloseWindow();
+    }
+    toggleWindow() {
+        this._overlay.classList.toggle("hidden");
+        this._window.classList.toggle("hidden");
+    }
+    _addHandlerShowWindow() {
+        this._btnOpen.addEventListener("click", this.toggleWindow.bind(this));
+    }
+    _addHandlerCloseWindow() {
+        this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
+        this._overlay.addEventListener("click", this.toggleWindow.bind(this));
+    }
+    //   addHandlerRemoveWindow() {
+    //     this._overlay.classList.add(".hidden");
+    //     this._window.classList.add(".hidden");
+    //   }
+    addHandlerUpload(handler) {
+        this._parentEl.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const dataArr = [
+                ...new FormData(this)
+            ];
+            const data = Object.fromEntries(dataArr);
+            console.log(data);
+            handler(data);
+        });
+    }
+}
+exports.default = new addFlightView();
 
 },{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
 
