@@ -578,9 +578,17 @@ const controlSearchResults = async function() {
         console.log(err);
     }
 };
-const controlAddRecipe = function(newRecipe) {
-    console.log(newRecipe);
-// Upload the new recipe data
+const controlAddFlight = async function(newFlight) {
+    try {
+        //Spinner before loading
+        (0, _flightViewJsDefault.default).renderSpinner();
+        // Loading flight and store it to the state.flight
+        await _modelJs.uploadFlight(newFlight);
+        //
+        (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
+    } catch (err) {
+        console.error(err);
+    }
 };
 // .................
 // const controlPagination = function (goToPage) {
@@ -596,7 +604,7 @@ const controlAddRecipe = function(newRecipe) {
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
-    (0, _addRecipeViewJsDefault.default)._addHandlerUpload(controlAddRecipe);
+    (0, _addRecipeViewJsDefault.default).addHandlerUpload(controlAddFlight);
 };
 init();
 
@@ -646,6 +654,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadFlight", ()=>loadFlight);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
+parcelHelpers.export(exports, "uploadFlight", ()=>uploadFlight);
 var _config = require("./config");
 var _helpersJs = require("./helpers.js");
 const state = {
@@ -663,8 +672,8 @@ const loadFlight = async function(id) {
         let flight = data;
         state.flight = {
             id: flight.id,
-            arrival: flight.arrivalTime,
-            departure: flight.departureTime,
+            arrivalTime: flight.arrivalTime,
+            departureTime: flight.departureTime,
             destination: flight.destination,
             destinationFullName: flight.destinationFullName,
             flightNumber: flight.flightNumber,
@@ -685,8 +694,8 @@ const loadSearchResults = async function(query) {
         state.search.results = data.map((el)=>{
             return {
                 id: el.id,
-                arrival: el.arrivalTime,
-                departure: el.departureTime,
+                arrivalTime: el.arrivalTime,
+                departureTime: el.departureTime,
                 destination: el.destination,
                 destinationFullName: el.destinationFullName,
                 flightNumber: el.flightNumber,
@@ -699,17 +708,57 @@ const loadSearchResults = async function(query) {
     } catch (err) {
         throw err;
     }
+};
+const uploadFlight = async function(newFlight) {
+    try {
+        //
+        const flight = {
+            arrivalTime: newFlight.arrival,
+            departureTime: newFlight.departure,
+            destination: newFlight.destination,
+            destinationFullName: newFlight.destinationFullName,
+            flightNumber: newFlight.flightNumber,
+            origin: newFlight.origin,
+            originFullName: newFlight.originFullName,
+            title: newFlight.title,
+            status: newFlight.status
+        };
+        const data = await (0, _helpersJs.sendJSON)(`${(0, _config.API_URL)}`, flight);
+        state.flight = data;
+        console.log(data);
+        console.log(state.flight);
+    } catch (err) {
+        console.error(err);
+    }
 }; // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
 
 },{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helpers.js":"hGI1E"}],"hGI1E":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
+parcelHelpers.export(exports, "sendJSON", ()=>sendJSON);
 const getJSON = async function(url) {
     try {
         const res = await fetch(url);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} ${res.status}`);
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+const sendJSON = async function(url, uploadData) {
+    try {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(uploadData)
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(`${data.message} ${res.status}`);
+        console.log(res);
         return data;
     } catch (err) {
         throw err;
@@ -726,7 +775,7 @@ class FlightView extends (0, _viewJsDefault.default) {
     _data;
     FormatArrival(data) {
         this._data = data;
-        const date = new Date(this._data.arrival);
+        const date = new Date(this._data.arrivalTime);
         const formattedDate = new Intl.DateTimeFormat("en-US", {
             month: "long",
             day: "numeric",
@@ -739,7 +788,7 @@ class FlightView extends (0, _viewJsDefault.default) {
     }
     FormatData(data) {
         this._data = data;
-        const date = new Date(this._data.departure);
+        const date = new Date(this._data.departureTime);
         const formattedDate = new Intl.DateTimeFormat("en-US", {
             month: "long",
             day: "numeric",
@@ -811,6 +860,7 @@ class View {
     render(data) {
         if (data.length === 0) return this.renderError();
         this._data = data;
+        console.log(this._data);
         const markup = this._generateMarkup();
         this._clear();
         this._parentEl.insertAdjacentHTML("afterbegin", markup);
@@ -846,7 +896,9 @@ class ResultsView extends (0, _viewJsDefault.default) {
     _data;
     _parentEl = document.querySelector(".search-results");
     _FormatData(data) {
-        const date = new Date(data.departure); // Use the provided data directly
+        console.log(data.departureTime);
+        const date = new Date(data.departureTime);
+        console.log(date); // Use the provided data directly
         const formattedDate = new Intl.DateTimeFormat("en-US", {
             hour: "numeric",
             minute: "2-digit",
@@ -933,17 +985,17 @@ class addRecipeView extends (0, _viewDefault.default) {
         this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
         this._overlay.addEventListener("click", this.toggleWindow.bind(this));
     }
-    _addHandlerUpload(handler) {
+    addHandlerUpload(handler) {
         this._parentEl.addEventListener("submit", function(e) {
             e.preventDefault();
             const dataArr = [
                 ...new FormData(this)
             ];
             const data = Object.fromEntries(dataArr);
+            console.log(data);
             handler(data);
         });
     }
-    _generateMarkup() {}
 }
 exports.default = new addRecipeView();
 

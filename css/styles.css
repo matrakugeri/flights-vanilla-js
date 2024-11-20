@@ -263,8 +263,8 @@ input::placeholder {
 
 .hidden-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7rem;
 }
 
 .form-information {
@@ -285,10 +285,10 @@ input::placeholder {
   background-color: #aaa;
   box-shadow: 1px 2px 3rem #868e96;
   border-radius: 22px;
-  max-width: 100rem;
+  /* max-width: 100rem; */
   padding: 5rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .pos {
