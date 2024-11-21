@@ -8,6 +8,16 @@ export default class View {
     this._parentEl.insertAdjacentHTML("afterbegin", markup);
   }
 
+  renderMessage(message = this.message) {
+    const markup = `
+    <div class="message">
+      <p>${message}</p>
+    </div>
+    `;
+    this._clear();
+    this._parentEl.insertAdjacentHTML("afterbegin", markup);
+  }
+
   _clear() {
     this._parentEl.innerHTML = "";
   }

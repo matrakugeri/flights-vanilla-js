@@ -587,6 +587,7 @@ const controlAddFlight = async function(newFlight) {
         await _modelJs.uploadFlight(newFlight);
         // Rendering the flight with the data stored in state
         (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
+        // addFlightView.renderMessage();
         // Change the window history pushstate
         window.history.pushState(null, "", `#${_modelJs.state.flight.id}`);
         // Hide modal after uploading
@@ -898,6 +899,15 @@ class View {
         this._clear();
         this._parentEl.insertAdjacentHTML("afterbegin", markup);
     }
+    renderMessage(message = this.message) {
+        const markup = `
+    <div class="message">
+      <p>${message}</p>
+    </div>
+    `;
+        this._clear();
+        this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    }
     _clear() {
         this._parentEl.innerHTML = "";
     }
@@ -1004,6 +1014,7 @@ class addFlightView extends (0, _viewDefault.default) {
     _overlay = document.querySelector(".form-information");
     _btnOpen = document.querySelector(".add-btn");
     _btnClose = document.querySelector(".pos");
+    message = `Flight successfully uploaded !`;
     constructor(){
         super();
         this._addHandlerShowWindow();
