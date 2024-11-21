@@ -5,10 +5,8 @@ class ResultsView extends View {
   _parentEl = document.querySelector(".search-results");
 
   _FormatData(data) {
-    console.log(data.departureTime);
     const date = new Date(data.departureTime);
 
-    console.log(date); // Use the provided data directly
     const formattedDate = new Intl.DateTimeFormat("en-US", {
       hour: "numeric", // Include hour
       minute: "2-digit", // Include minutes
