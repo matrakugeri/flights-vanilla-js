@@ -16,12 +16,16 @@ class ResultsView extends View {
   }
 
   _generateMarkup() {
+    const id = +window.location.hash.slice(1);
+    console.log(id);
     return this._data
       .map((el) => {
+        console.log(el.id);
         const formattedDeparture = this._FormatData(el); // Format the departure time for each element
         return `
-            <li class="list-item">
-                <a href="#${el.id}" class="list-link">
+            <li class="list-item ">
+                <a class="list-link"
+                  href="#${el.id}">
                     <div class="list-div">
                         <img
                             src="https://i.imgur.com/5DmMjV9.jpeg"

@@ -551,6 +551,78 @@
       "title": "Atlanta to Paris",
       "status": "Scheduled",
       "id": 47
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Cancelled",
+      "id": 48
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 49
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Delayed",
+      "id": 50
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Cancelled",
+      "id": 51
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Cancelled",
+      "id": 52
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austriadddd",
+      "flightNumber": "UA820",
+      "origin": "dd",
+      "originFullName": "Athens",
+      "title": "Athens to Viennaadadda",
+      "status": "Delayed",
+      "id": 53
     }
   ]
 }

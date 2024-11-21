@@ -73,6 +73,14 @@ class FlightView extends View {
               <p>${this._data.status}</p>
             </div>
           </div>
+          <div class="buttons">
+                  <button class="edit">
+                    Edit&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="delete">
+                      Delete&nbsp;&nbsp;<i class="fa-solid fa-trash-can"></i>
+                      </button>
+                      </div>
         </div>
         `;
   }
