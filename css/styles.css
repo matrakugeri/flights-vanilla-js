@@ -364,13 +364,25 @@ input::placeholder {
   }
 }
 
-@media (max-width: 56em) {
+/*********************************/
+/* Media query for Container-1 */
+/*********************************/
+
+@media (max-width: 60em) {
   .container {
     grid-template-columns: repeat(1, 1fr);
   }
+  .container-1 {
+    border-radius: 22px 22px 0 0;
+  }
+  .flight-div .flight-image {
+    border-radius: 0 0 0 0;
+  }
 }
 
+/********************/
 /* FLIGHT VIEW */
+/********************/
 
 .flight-div {
   overflow: hidden;
@@ -443,7 +455,7 @@ input::placeholder {
 }
 
 .flight-status {
-  grid-row: 1/-1;
+  /* grid-row: 1 / span 2; */
 }
 
 .grid-container p {
@@ -525,4 +537,37 @@ input::placeholder {
   font-size: 1.6rem;
   font-style: italic;
   padding: 1.5rem 3.2rem;
+}
+
+/*****************************************************/
+/* GRID CONTAINER INSIDE CONTAINER-2 MEDIA QUERY */
+/*****************************************************/
+
+@media (max-width: 46em) {
+  .grid-container {
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
+  }
+  /* .flight-status {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  } */
+}
+
+@media (max-width: 39em) {
+  .grid-container {
+    grid-template-columns: repeat(1, auto);
+    /* grid-template-rows: repeat(6, auto); */
+  }
+  .destination {
+    grid-column: 1/2;
+    grid-row: 3/4;
+  }
+  .arrival {
+    grid-column: 1/2;
+    grid-row: 4/5;
+  }
+  .flight {
+    grid-row: 6 / 7;
+  }
 }
