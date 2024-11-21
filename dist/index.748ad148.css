@@ -187,10 +187,7 @@ input::placeholder {
 }
 
 .pagination {
-  justify-content: space-between;
-  align-items: center;
-  padding: 2.2rem 1.2rem 0;
-  display: flex;
+  padding: 2rem 1.2rem;
 }
 
 .pagination-btn {
@@ -198,9 +195,18 @@ input::placeholder {
   background-color: #868e96;
   border: none;
   border-radius: 22px;
+  margin-bottom: 2rem;
   padding: 1.2rem 2.2rem;
   transition: all .4s;
   display: inline-block;
+}
+
+.btn_prev {
+  float: left;
+}
+
+.btn_next {
+  float: right;
 }
 
 .pagination-btn:hover {

@@ -7,8 +7,8 @@ import { API_URL, MODAL_SEC } from "./config";
 import ResultsView from "./views/ResultsView.js";
 import searchView from "./views/searchView.js";
 import addFlightView from "./views/addFlightView.js";
-// ......
 import PaginationView from "./views/paginationView.js";
+
 const controlFlight = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -40,6 +40,9 @@ const controlSearchResults = async function () {
     console.log(model.state.search.results);
     // 2)Rendering flight with the data stored in the state.search.results
     ResultsView.render(model.state.search.results);
+
+    // Rendering buttons
+    PaginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }
@@ -67,23 +70,25 @@ const controlAddFlight = async function (newFlight) {
   }
 };
 
-// .................
-// const controlPagination = function (goToPage) {
-//   // 1) Load new page results
-//   model.loadSearchResults(model.state.search.query, goToPage);
+const controlPagination = async function (goToPage) {
+  try {
+    // 1) Load new page results
+    await model.loadSearchResults(model.state.search.query, goToPage);
+    console.log(goToPage);
+    // 2) Render new results
+    ResultsView.render(model.state.search.results);
 
-//   // 2) Render new results
-//   ResultsView.render(model.state.search.results);
-
-//   // 3) Update pagination buttons
-//   PaginationView.render(model.state.search);
-// };
-// // ......
-// PaginationView.addHandlerClick(controlPagination);
+    // 3) Update pagination buttons
+    PaginationView.render(model.state.search);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const init = function () {
   FlightView.addHandlerRender(controlFlight);
   searchView.addHandlerSearch(controlSearchResults);
   addFlightView.addHandlerUpload(controlAddFlight);
+  PaginationView.addHandlerClick(controlPagination);
 };
 init();

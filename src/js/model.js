@@ -6,11 +6,10 @@ export const state = {
     query: "",
     results: [],
     resultsPerPage: RES_PER_PAGE,
-    page: 0,
+    page: 1,
+    totalResults: 0,
   },
 };
-
-// const query = document.querySelector(".search");
 
 export const loadFlight = async function (id) {
   try {
@@ -34,10 +33,27 @@ export const loadFlight = async function (id) {
   }
 };
 
-export const loadSearchResults = async function (query) {
+export const loadSearchResults = async function (query, page = 1) {
   try {
     state.search.query = query;
-    const data = await getJSON(`${API_URL}?q=${query}`);
+    state.search.page = page;
+
+    const start = (page - 1) * state.search.resultsPerPage;
+    // const data = await getJSON(`${API_URL}?q=${query}`);
+    // const data = await getJSON(
+    //   `${API_URL}?_start=${start}&_limit=${state.search.resultsPerPage}&q=${query}`
+    // );
+
+    const response = await fetch(
+      `${API_URL}?_start=${start}&_limit=${state.search.resultsPerPage}&q=${query}`
+    );
+
+    // Get the total count from headers or response body
+    const totalResults = response.headers.get("X-Total-Results");
+    console.log(totalResults);
+
+    const data = await response.json();
+
     state.search.results = data.map((el) => {
       return {
         id: el.id,
@@ -52,6 +68,8 @@ export const loadSearchResults = async function (query) {
         status: el.status,
       };
     });
+    state.search.totalResults = +totalResults;
+    console.log(state.search.totalResults);
   } catch (err) {
     throw err;
   }

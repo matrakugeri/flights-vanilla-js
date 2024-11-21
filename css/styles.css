@@ -233,10 +233,7 @@ input::placeholder {
 /******************************/
 
 .pagination {
-  padding: 2.2rem 1.2rem 0 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 2rem 1.2rem;
 }
 
 .pagination-btn {
@@ -247,6 +244,15 @@ input::placeholder {
   background-color: #868e96;
   cursor: pointer;
   transition: all 0.4s;
+  margin-bottom: 2rem;
+}
+
+.btn_prev {
+  float: left;
+}
+
+.btn_next {
+  float: right;
 }
 
 .pagination-btn:hover {

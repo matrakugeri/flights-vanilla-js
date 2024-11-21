@@ -546,7 +546,6 @@ var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _addFlightViewJs = require("./views/addFlightView.js");
 var _addFlightViewJsDefault = parcelHelpers.interopDefault(_addFlightViewJs);
-// ......
 var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 const controlFlight = async function() {
@@ -574,6 +573,8 @@ const controlSearchResults = async function() {
         console.log(_modelJs.state.search.results);
         // 2)Rendering flight with the data stored in the state.search.results
         (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+        // Rendering buttons
+        (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
         console.log(err);
     }
@@ -596,25 +597,28 @@ const controlAddFlight = async function(newFlight) {
         console.error(err);
     }
 };
-// .................
-// const controlPagination = function (goToPage) {
-//   // 1) Load new page results
-//   model.loadSearchResults(model.state.search.query, goToPage);
-//   // 2) Render new results
-//   ResultsView.render(model.state.search.results);
-//   // 3) Update pagination buttons
-//   PaginationView.render(model.state.search);
-// };
-// // ......
-// PaginationView.addHandlerClick(controlPagination);
+const controlPagination = async function(goToPage) {
+    try {
+        // 1) Load new page results
+        await _modelJs.loadSearchResults(_modelJs.state.search.query, goToPage);
+        console.log(goToPage);
+        // 2) Render new results
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+        // 3) Update pagination buttons
+        (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
+    } catch (err) {
+        console.log(err);
+    }
+};
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _addFlightViewJsDefault.default).addHandlerUpload(controlAddFlight);
+    (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
 init();
 
-},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/paginationView.js":"6z7bi","./views/addFlightView.js":"BUVwN"}],"k5Hzs":[function(require,module,exports) {
+},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/addFlightView.js":"BUVwN","./views/paginationView.js":"6z7bi"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -671,7 +675,8 @@ const state = {
         query: "",
         results: [],
         resultsPerPage: (0, _config.RES_PER_PAGE),
-        page: 0
+        page: 1,
+        totalResults: 0
     }
 };
 const loadFlight = async function(id) {
@@ -695,10 +700,20 @@ const loadFlight = async function(id) {
         throw err;
     }
 };
-const loadSearchResults = async function(query) {
+const loadSearchResults = async function(query, page = 1) {
     try {
         state.search.query = query;
-        const data = await (0, _helpersJs.getJSON)(`${(0, _config.API_URL)}?q=${query}`);
+        state.search.page = page;
+        const start = (page - 1) * state.search.resultsPerPage;
+        // const data = await getJSON(`${API_URL}?q=${query}`);
+        // const data = await getJSON(
+        //   `${API_URL}?_start=${start}&_limit=${state.search.resultsPerPage}&q=${query}`
+        // );
+        const response = await fetch(`${(0, _config.API_URL)}?_start=${start}&_limit=${state.search.resultsPerPage}&q=${query}`);
+        // Get the total count from headers or response body
+        const totalResults = response.headers.get("X-Total-Results");
+        console.log(totalResults);
+        const data = await response.json();
         state.search.results = data.map((el)=>{
             return {
                 id: el.id,
@@ -713,6 +728,8 @@ const loadSearchResults = async function(query) {
                 status: el.status
             };
         });
+        state.search.totalResults = +totalResults;
+        console.log(state.search.totalResults);
     } catch (err) {
         throw err;
     }
@@ -904,9 +921,7 @@ class ResultsView extends (0, _viewJsDefault.default) {
     _data;
     _parentEl = document.querySelector(".search-results");
     _FormatData(data) {
-        console.log(data.departureTime);
         const date = new Date(data.departureTime);
-        console.log(date); // Use the provided data directly
         const formattedDate = new Intl.DateTimeFormat("en-US", {
             hour: "numeric",
             minute: "2-digit",
@@ -966,60 +981,6 @@ class SearchView extends (0, _viewDefault.default) {
 }
 exports.default = new SearchView();
 
-},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6z7bi":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _view = require("./View");
-var _viewDefault = parcelHelpers.interopDefault(_view);
-class PaginationView extends (0, _viewDefault.default) {
-    _parentEl = document.querySelector(".pagination");
-    addHandlerClick(handler) {
-        this._parentEl.addEventListener("click", function(e) {
-            const btn = e.target.closest(".pagination-btn");
-            if (!btn) return;
-            const goToPage = +btn.dataset.goto;
-            handler(goToPage);
-        });
-    }
-    _generateMarkup() {
-        const currentPage = this._data.page; // Current page
-        const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage); // Total pages
-        if (currentPage === 1 && numPages > 1) // Page 1, and other pages exist
-        return `
-          <button data-goto="${currentPage + 1}" class="pagination-btn">
-            <span>Page ${currentPage + 1} <i class="fa-solid fa-arrow-right"></i></span>
-          </button>
-        `;
-        if (currentPage === numPages && numPages > 1) // Last page
-        return `
-          <button data-goto="${currentPage - 1}" class="pagination-btn">
-            <span><i class="fa-solid fa-arrow-left"></i> Page ${currentPage - 1}</span>
-          </button>
-        `;
-        if (currentPage < numPages) // Other pages
-        return `
-          <button data-goto="${currentPage - 1}" class="pagination-btn">
-            <span><i class="fa-solid fa-arrow-left"></i> Page ${currentPage - 1}</span>
-          </button>
-          <button data-goto="${currentPage + 1}" class="pagination-btn">
-            <span>Page ${currentPage + 1} <i class="fa-solid fa-arrow-right"></i></span>
-          </button>
-        `;
-        // Page 1, and no other pages exist
-        return "";
-    }
-}
-exports.default = new PaginationView(); // class PaginationView extends View {
- //   _parentEl = document.querySelector(".pagination");
- //   _generateMarkup() {
- //     // Page 1 and there are other pages
- //     // Page 1 , and there are NO other pages
- //     // Last page
- //     // Other page
- //   }
- // }
- // export default new PaginationView();
-
 },{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"BUVwN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -1064,6 +1025,64 @@ class addFlightView extends (0, _viewDefault.default) {
     }
 }
 exports.default = new addFlightView();
+
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6z7bi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class PaginationView extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector(".pagination");
+    addHandlerClick(handler) {
+        this._parentEl.addEventListener("click", function(e) {
+            const btn = e.target.closest(".pagination-btn");
+            if (!btn) return;
+            const goToPage = +btn.dataset.goto;
+            handler(goToPage);
+            console.log(goToPage);
+        });
+    }
+    _generateMarkup() {
+        const currentPage = this._data.page; // Current page
+        const totalResults = this._data.totalResults; // Total results from state
+        console.log(totalResults);
+        const numPages = Math.ceil(totalResults / this._data.resultsPerPage); // Total pages
+        console.log(numPages);
+        if (currentPage === 1 && numPages > 1) // Page 1, and other pages exist
+        return `
+        <button data-goto="${currentPage + 1}" class="pagination-btn btn_next">
+          <span>Page ${currentPage + 1} <i class="fa-solid fa-arrow-right"></i></span>
+        </button>
+      `;
+        if (currentPage === numPages && numPages > 1) // Last page
+        return `
+        <button data-goto="${currentPage - 1}" class="pagination-btn btn_prev">
+          <span><i class="fa-solid fa-arrow-left"></i> Page ${currentPage - 1}</span>
+        </button>
+      `;
+        if (currentPage < numPages) // Other pages
+        return `
+        <button data-goto="${currentPage - 1}" class="pagination-btn btn_prev">
+          <span><i class="fa-solid fa-arrow-left"></i> Page ${currentPage - 1}</span>
+        </button>
+        <button data-goto="${currentPage + 1}" class="pagination-btn btn_next">
+          <span>Page ${currentPage + 1} <i class="fa-solid fa-arrow-right"></i></span>
+        </button>
+      `;
+        // If only one page
+        return "";
+    }
+}
+exports.default = new PaginationView(); // class PaginationView extends View {
+ //   _parentEl = document.querySelector(".pagination");
+ //   _generateMarkup() {
+ //     // Page 1 and there are other pages
+ //     // Page 1 , and there are NO other pages
+ //     // Last page
+ //     // Other page
+ //   }
+ // }
+ // export default new PaginationView();
 
 },{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
 
