@@ -182,7 +182,7 @@ input::placeholder {
   transition: all .4s;
 }
 
-.list-item:hover {
+.list-item:hover, .list-item:focus-within {
   background-color: #ced4da;
 }
 
@@ -331,6 +331,7 @@ input::placeholder {
   max-width: 75rem;
   max-height: 100%;
   margin: 0 auto;
+  position: relative;
   box-shadow: 1px 2px 3rem #868e96;
 }
 
@@ -404,6 +405,59 @@ input::placeholder {
 .lower {
   opacity: .85;
   color: #000;
+}
+
+.buttons {
+  margin: 2rem 1.5rem 1rem 0;
+  font-family: Nunito-sans;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.edit {
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #868e96;
+  border: none;
+  border-radius: 22px;
+  margin-right: .5rem;
+  padding: 1rem 1.4rem;
+  transition: all .4s;
+  display: inline-block;
+}
+
+.edit:hover {
+  background-color: #adb5bd;
+}
+
+.delete {
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: #ff0000b6;
+  border: none;
+  border-radius: 22px;
+  margin-right: 1.2rem;
+  padding: 1rem 1.4rem;
+  transition: all .4s;
+  display: inline-block;
+}
+
+.delete:hover {
+  background-color: #5e2828;
+}
+
+.paddr {
+  border: none;
+  border-radius: 22px;
+  outline: none;
+  width: 30rem;
+  margin: 2rem 0;
+  padding: 1.5rem 3.2rem;
+  font-size: 1.6rem;
+  font-style: italic;
 }
 
 /*# sourceMappingURL=index.748ad148.css.map */

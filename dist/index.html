@@ -77,17 +77,17 @@
       </div>
       <div class="container-2">
         <!--
-        FLIGHT-VIEW  
-        <div class="flight-div">
+          // FLIGHT-VIEW
+          <div class="flight-div">
           <img
             src="https://i.imgur.com/5DmMjV9.jpeg"
             alt="airplane"
             class="flight-image"
-          />
-        </div>
-
-        <div class="second-div">
-          <h2 class="paragraph">
+            />
+            </div>
+            
+            <div class="second-div">
+              <h2 class="paragraph">
             FLIGHT DETAILS <span class="coleur">'FLIGHT NUMBER'</span>
           </h2>
 
@@ -96,28 +96,36 @@
               <h2>Origin</h2>
               <p>From</p>
               <p>$ORIGINFULLNAME(ORIGIN)</p>
-            </div>
-            <div class="departure">
-              <p>Departure Time</p>
-              <p>$DATE</p>
-            </div>
-            <div class="destination">
-              <h2>Destination</h2>
-              <p>To</p>
+              </div>
+              <div class="departure">
+                <p>Departure Time</p>
+                <p>$DATE</p>
+                </div>
+                <div class="destination">
+                  <h2>Destination</h2>
+                  <p>To</p>
               <p>$DESTINATIONFULLNAME(DESTINATION)</p>
             </div>
             <div class="arrival">
               <p>Arrival Time</p>
               <p>$DATE</p>
-            </div>
-            <div class="flight-status">
-              <h2>Flight</h2>
-              <p>Status</p>
-              <p>$STATUS</p>
-            </div>
-          </div>
-        </div>
-         -->
+              </div>
+              <div class="flight-status">
+                <h2>Flight</h2>
+                <p>Status</p>
+                <p>$STATUS</p>
+                </div>
+                </div>
+                <div class="buttons">
+                  <button class="edit">
+                    Edit&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="delete">
+                      Delete&nbsp;&nbsp;<i class="fa-solid fa-trash-can"></i>
+                      </button>
+                      </div>
+                      </div>
+                      -->
       </div>
     </div>
 
@@ -153,7 +161,23 @@
           <label for="arrival">Arrival Time</label>
           <input class="flight-form" type="datetime-local" id="arrival" value="2024-11-25T12:15" required="" name="arrival">
           <label for="status">Status</label>
-          <input class="flight-form" type="text" id="status" placeholder="Scheduled" value="Scheduled" required="" name="status">
+          <select name="status" class="paddr">
+            <option value="Scheduled">Scheduled</option>
+            <option value="Delayed">Delayed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <!--
+            <label for="status">Status</label>
+            <input
+            //   class="flight-form"
+            //   type="text"
+            //   id="status"
+            //   placeholder="Scheduled"
+            //   value="Scheduled"
+            //   required
+            //   name="status"
+            // />
+            -->
           <button class="upload-btn">UPLOAD</button>
         </div>
       </form>

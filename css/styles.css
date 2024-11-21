@@ -228,6 +228,10 @@ input::placeholder {
   background-color: #ced4da;
 }
 
+.list-item:focus-within {
+  background-color: #ced4da;
+}
+
 /******************************/
 /* PAGINATION BUTTONS */
 /******************************/
@@ -391,6 +395,7 @@ input::placeholder {
   max-height: 100%;
   box-shadow: 1px 2px 3rem #868e96;
   background-color: #fff;
+  position: relative;
   /* transform: translateY(-20px); */
 }
 
@@ -469,9 +474,55 @@ input::placeholder {
   /* font-weight: 500; */
 }
 
-/* .text-img {
+.buttons {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
+  right: 0;
+  bottom: 0;
+  margin: 2rem 1.5rem 1rem 0;
+  font-family: "Nunito-sans";
+}
+
+.edit {
+  display: inline-block;
+  border: none;
+  background-color: #868e96;
+  padding: 1rem 1.4rem;
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  border-radius: 22px;
+  transition: all 0.4s;
+}
+
+.edit:hover {
+  background-color: #adb5bd;
+}
+
+.delete {
+  display: inline-block;
+  border: none;
+  background-color: rgba(255, 0, 0, 0.712);
+  padding: 1rem 1.4rem;
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 1.2rem;
+  cursor: pointer;
+  border-radius: 22px;
+  transition: all 0.4s;
+}
+
+.delete:hover {
+  background-color: #5e2828;
+}
+
+.paddr {
+  border-radius: 22px;
+  margin: 2rem 0;
+  border: none;
+  outline: none;
+  width: 30rem;
+  font-size: 1.6rem;
+  font-style: italic;
+  padding: 1.5rem 3.2rem;
+}
