@@ -548,16 +548,11 @@ input::placeholder {
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(3, auto);
   }
-  /* .flight-status {
-    grid-column: 1/2;
-    grid-row: 3/4;
-  } */
 }
 
 @media (max-width: 39em) {
   .grid-container {
     grid-template-columns: repeat(1, auto);
-    /* grid-template-rows: repeat(6, auto); */
   }
   .destination {
     grid-column: 1/2;
@@ -570,4 +565,14 @@ input::placeholder {
   .flight {
     grid-row: 6 / 7;
   }
+}
+
+.message {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+}
+
+.message p {
+  font-size: 1.6rem;
 }

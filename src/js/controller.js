@@ -58,6 +58,8 @@ const controlAddFlight = async function (newFlight) {
     // Rendering the flight with the data stored in state
     FlightView.render(model.state.flight);
 
+    // addFlightView.renderMessage();
+
     // Change the window history pushstate
     window.history.pushState(null, "", `#${model.state.flight.id}`);
 

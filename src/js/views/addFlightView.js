@@ -9,6 +9,8 @@ class addFlightView extends View {
   _btnOpen = document.querySelector(".add-btn");
   _btnClose = document.querySelector(".pos");
 
+  message = `Flight successfully uploaded !`;
+
   constructor() {
     super();
     this._addHandlerShowWindow();

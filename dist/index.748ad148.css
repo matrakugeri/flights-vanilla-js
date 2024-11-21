@@ -489,4 +489,14 @@ input::placeholder {
   }
 }
 
+.message {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 5rem 4rem;
+}
+
+.message p {
+  font-size: 1.6rem;
+}
+
 /*# sourceMappingURL=index.748ad148.css.map */
