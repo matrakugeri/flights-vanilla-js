@@ -33,7 +33,7 @@ class editFlightView extends View {
     this._overlay.addEventListener("click", this.toggleWindow.bind(this));
   }
 
-  addHandlerUpload(handler) {
+  addHandlerEdit(handler) {
     this._parentEl.addEventListener("submit", function (e) {
       e.preventDefault();
       const dataArr = [...new FormData(this)];

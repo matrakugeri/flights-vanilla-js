@@ -16,8 +16,6 @@ class ResultsView extends View {
   }
 
   _generateMarkup() {
-    const id = +window.location.hash.slice(1);
-    console.log(id);
     return this._data
       .map((el) => {
         console.log(el.id);

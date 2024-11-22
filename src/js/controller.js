@@ -89,9 +89,28 @@ const controlPagination = async function (goToPage) {
 };
 
 const controlEditButton = async function () {
-  editFlightView.toggleWindow();
+  try {
+    editFlightView.toggleWindow();
 
-  model.makeChanges();
+    model.makeChanges();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const controlEdit = async function (newFlight) {
+  try {
+    editFlightView.renderSpinner();
+    // await the savechanges and store the object to the state flight
+    await model.saveChanges(newFlight);
+    // Rendering the flight with the data stored in state
+    FlightView.render(model.state.flight);
+    ResultsView.render(model.state.search.results);
+    // Hide modal after uploading
+    editFlightView.toggleWindow();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const init = function () {
@@ -100,5 +119,6 @@ const init = function () {
   addFlightView.addHandlerUpload(controlAddFlight);
   PaginationView.addHandlerClick(controlPagination);
   editFlightView.addHandlerEditButton(controlEditButton);
+  editFlightView.addHandlerEdit(controlEdit);
 };
 init();

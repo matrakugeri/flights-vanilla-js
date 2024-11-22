@@ -614,8 +614,26 @@ const controlPagination = async function(goToPage) {
     }
 };
 const controlEditButton = async function() {
-    (0, _editFlightViewJsDefault.default).toggleWindow();
-    _modelJs.makeChanges();
+    try {
+        (0, _editFlightViewJsDefault.default).toggleWindow();
+        _modelJs.makeChanges();
+    } catch (err) {
+        console.log(err);
+    }
+};
+const controlEdit = async function(newFlight) {
+    try {
+        (0, _editFlightViewJsDefault.default).renderSpinner();
+        // await the savechanges and store the object to the state flight
+        await _modelJs.saveChanges(newFlight);
+        // Rendering the flight with the data stored in state
+        (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
+        (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+        // Hide modal after uploading
+        (0, _editFlightViewJsDefault.default).toggleWindow();
+    } catch (err) {
+        console.log(err);
+    }
 };
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
@@ -623,6 +641,7 @@ const init = function() {
     (0, _addFlightViewJsDefault.default).addHandlerUpload(controlAddFlight);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
     (0, _editFlightViewJsDefault.default).addHandlerEditButton(controlEditButton);
+    (0, _editFlightViewJsDefault.default).addHandlerEdit(controlEdit);
 };
 init();
 
@@ -675,6 +694,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadFlight", ()=>loadFlight);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "uploadFlight", ()=>uploadFlight);
+parcelHelpers.export(exports, "saveChanges", ()=>saveChanges);
 parcelHelpers.export(exports, "makeChanges", ()=>makeChanges);
 var _config = require("./config");
 var _helpersJs = require("./helpers.js");
@@ -772,6 +792,31 @@ const uploadFlight = async function(newFlight) {
     } catch (err) {
         console.error(err);
     }
+};
+const saveChanges = async function(newFlight) {
+    const flight = {
+        arrivalTime: newFlight.arrival,
+        departureTime: newFlight.departure,
+        destination: newFlight.destination,
+        destinationFullName: newFlight.destinationFullName,
+        flightNumber: newFlight.flightNumber,
+        origin: newFlight.origin,
+        originFullName: newFlight.originFullName,
+        title: newFlight.title,
+        status: newFlight.status
+    };
+    const id = window.location.hash.slice(1);
+    const data = await (0, _helpersJs.editJSON)(`${(0, _config.API_URL)}${id}`, flight);
+    state.flight = {
+        id,
+        ...flight
+    };
+    console.log(state.flight);
+    console.warn(state.search.results);
+    const flightIndex = state.search.results.findIndex((el)=>+el.id === +id);
+    state.search.results[flightIndex] = state.flight;
+    console.log(flightIndex);
+    console.log(data);
 };
 const makeChanges = function() {
     flightNumber.value = state.flight.flightNumber;
@@ -998,8 +1043,6 @@ class ResultsView extends (0, _viewJsDefault.default) {
         return formattedDate;
     }
     _generateMarkup() {
-        const id = +window.location.hash.slice(1);
-        console.log(id);
         return this._data.map((el)=>{
             console.log(el.id);
             const formattedDeparture = this._FormatData(el); // Format the departure time for each element
@@ -1189,7 +1232,7 @@ class editFlightView extends (0, _viewDefault.default) {
         this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
         this._overlay.addEventListener("click", this.toggleWindow.bind(this));
     }
-    addHandlerUpload(handler) {
+    addHandlerEdit(handler) {
         this._parentEl.addEventListener("submit", function(e) {
             e.preventDefault();
             const dataArr = [

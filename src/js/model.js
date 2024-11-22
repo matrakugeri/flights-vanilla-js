@@ -1,5 +1,5 @@
 import { API_URL, key, RES_PER_PAGE } from "./config";
-import { getJSON, sendJSON } from "./helpers.js";
+import { editJSON, getJSON, sendJSON } from "./helpers.js";
 export const state = {
   flight: {},
   search: {
@@ -106,6 +106,29 @@ export const uploadFlight = async function (newFlight) {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const saveChanges = async function (newFlight) {
+  const flight = {
+    arrivalTime: newFlight.arrival,
+    departureTime: newFlight.departure,
+    destination: newFlight.destination,
+    destinationFullName: newFlight.destinationFullName,
+    flightNumber: newFlight.flightNumber,
+    origin: newFlight.origin,
+    originFullName: newFlight.originFullName,
+    title: newFlight.title,
+    status: newFlight.status,
+  };
+  const id = window.location.hash.slice(1);
+  const data = await editJSON(`${API_URL}${id}`, flight);
+  state.flight = { id, ...flight };
+  console.log(state.flight);
+  console.warn(state.search.results);
+  const flightIndex = state.search.results.findIndex((el) => +el.id === +id);
+  state.search.results[flightIndex] = state.flight;
+  console.log(flightIndex);
+  console.log(data);
 };
 
 export const makeChanges = function () {
