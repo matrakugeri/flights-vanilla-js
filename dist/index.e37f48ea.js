@@ -623,7 +623,7 @@ const controlEditButton = async function() {
 };
 const controlEdit = async function(newFlight) {
     try {
-        (0, _editFlightViewJsDefault.default).renderSpinner();
+        (0, _flightViewJsDefault.default).renderSpinner();
         // await the savechanges and store the object to the state flight
         await _modelJs.saveChanges(newFlight);
         // Rendering the flight with the data stored in state
