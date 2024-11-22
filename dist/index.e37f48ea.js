@@ -548,6 +548,8 @@ var _addFlightViewJs = require("./views/addFlightView.js");
 var _addFlightViewJsDefault = parcelHelpers.interopDefault(_addFlightViewJs);
 var _paginationViewJs = require("./views/paginationView.js");
 var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
+var _editFlightViewJs = require("./views/editFlightView.js");
+var _editFlightViewJsDefault = parcelHelpers.interopDefault(_editFlightViewJs);
 const controlFlight = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -611,15 +613,20 @@ const controlPagination = async function(goToPage) {
         console.log(err);
     }
 };
+const controlEditButton = async function() {
+    (0, _editFlightViewJsDefault.default).toggleWindow();
+    _modelJs.makeChanges();
+};
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _addFlightViewJsDefault.default).addHandlerUpload(controlAddFlight);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
+    (0, _editFlightViewJsDefault.default).addHandlerEditButton(controlEditButton);
 };
 init();
 
-},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/addFlightView.js":"BUVwN","./views/paginationView.js":"6z7bi"}],"k5Hzs":[function(require,module,exports) {
+},{"./config":"k5Hzs","./model.js":"Y4A21","./views/FlightView.js":"9bVj3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./views/ResultsView.js":"8JjiB","./views/searchView.js":"9OQAM","./views/addFlightView.js":"BUVwN","./views/paginationView.js":"6z7bi","./views/editFlightView.js":"g5wUZ"}],"k5Hzs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
@@ -668,6 +675,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadFlight", ()=>loadFlight);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "uploadFlight", ()=>uploadFlight);
+parcelHelpers.export(exports, "makeChanges", ()=>makeChanges);
 var _config = require("./config");
 var _helpersJs = require("./helpers.js");
 const state = {
@@ -680,21 +688,29 @@ const state = {
         totalResults: 0
     }
 };
+let flightNumber = document.getElementById("flight-numberEdit");
+let origin = document.getElementById("originEdit");
+let originFullName = document.getElementById("originFullNameEdit");
+let destination = document.getElementById("destinationEdit");
+let destinationFullName = document.getElementById("destinationFullNameEdit");
+let title = document.getElementById("titleEdit");
+let departure = document.getElementById("departureEdit");
+let arrival = document.getElementById("arrivalEdit");
+let status = document.getElementById("statusEdit");
 const loadFlight = async function(id) {
     try {
         const data = await (0, _helpersJs.getJSON)(`${(0, _config.API_URL)}${id}`);
-        let flight = data;
         state.flight = {
-            id: flight.id,
-            arrivalTime: flight.arrivalTime,
-            departureTime: flight.departureTime,
-            destination: flight.destination,
-            destinationFullName: flight.destinationFullName,
-            flightNumber: flight.flightNumber,
-            origin: flight.origin,
-            originFullName: flight.originFullName,
-            title: flight.title,
-            status: flight.status
+            id: data.id,
+            arrivalTime: data.arrivalTime,
+            departureTime: data.departureTime,
+            destination: data.destination,
+            destinationFullName: data.destinationFullName,
+            flightNumber: data.flightNumber,
+            origin: data.origin,
+            originFullName: data.originFullName,
+            title: data.title,
+            status: data.status
         };
     } catch (err) {
         console.error(err);
@@ -756,6 +772,22 @@ const uploadFlight = async function(newFlight) {
     } catch (err) {
         console.error(err);
     }
+};
+const makeChanges = function() {
+    flightNumber.value = state.flight.flightNumber;
+    origin.value = state.flight.origin;
+    originFullName.value = state.flight.originFullName;
+    destination.value = state.flight.destination;
+    destinationFullName.value = state.flight.destinationFullName;
+    title.value = state.flight.title;
+    departure.value = state.flight.departureTime;
+    arrival.value = state.flight.arrivalTime;
+    status.value = state.flight.status;
+    console.log(title.value);
+    console.log(state.flight.title);
+    console.log(arrival.value);
+    console.log(departure.value);
+    console.log(status.value);
 }; // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
 
 },{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helpers.js":"hGI1E"}],"hGI1E":[function(require,module,exports) {
@@ -763,6 +795,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
 parcelHelpers.export(exports, "sendJSON", ()=>sendJSON);
+parcelHelpers.export(exports, "editJSON", ()=>editJSON);
 const getJSON = async function(url) {
     try {
         const res = await fetch(url);
@@ -788,6 +821,23 @@ const sendJSON = async function(url, uploadData) {
         return data;
     } catch (err) {
         throw err;
+    }
+};
+const editJSON = async function(url, uploadData) {
+    try {
+        const res = await fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(uploadData)
+        });
+        if (!res.ok) return;
+        const data = res.json();
+        console.log(res, data);
+        return data;
+    } catch (err) {
+        console.error(err);
     }
 };
 
@@ -1106,6 +1156,52 @@ exports.default = new PaginationView(); // class PaginationView extends View {
  //   }
  // }
  // export default new PaginationView();
+
+},{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g5wUZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _view = require("./View");
+var _viewDefault = parcelHelpers.interopDefault(_view);
+class editFlightView extends (0, _viewDefault.default) {
+    _parentEl = document.querySelector(".hidden-form-edit");
+    _parentEl2 = document.querySelector(".container-2");
+    _window = document.querySelector(".new-flight-edit");
+    _overlay = document.querySelector(".form-information-edit");
+    _btnOpen = document.querySelector(".edit");
+    _btnClose = document.querySelector(".pos-edit");
+    constructor(){
+        super();
+        // this.addHandlerClick();
+        this.addHandlerRemove();
+    }
+    toggleWindow() {
+        this._overlay.classList.toggle("hidden");
+        this._window.classList.toggle("hidden");
+    }
+    addHandlerEditButton(handler) {
+        this._parentEl2.addEventListener("click", (e)=>{
+            const clicked = e.target.closest(".edit");
+            if (!clicked) return;
+            handler();
+        });
+    }
+    addHandlerRemove() {
+        this._btnClose.addEventListener("click", this.toggleWindow.bind(this));
+        this._overlay.addEventListener("click", this.toggleWindow.bind(this));
+    }
+    addHandlerUpload(handler) {
+        this._parentEl.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const dataArr = [
+                ...new FormData(this)
+            ];
+            const data = Object.fromEntries(dataArr);
+            console.log(data);
+            handler(data);
+        });
+    }
+}
+exports.default = new editFlightView();
 
 },{"./View":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fA0o9","aenu9"], "aenu9", "parcelRequire0ab2")
 

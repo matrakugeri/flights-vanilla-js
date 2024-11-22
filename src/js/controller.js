@@ -8,6 +8,7 @@ import ResultsView from "./views/ResultsView.js";
 import searchView from "./views/searchView.js";
 import addFlightView from "./views/addFlightView.js";
 import PaginationView from "./views/paginationView.js";
+import editFlightView from "./views/editFlightView.js";
 
 const controlFlight = async function () {
   try {
@@ -87,10 +88,17 @@ const controlPagination = async function (goToPage) {
   }
 };
 
+const controlEditButton = async function () {
+  editFlightView.toggleWindow();
+
+  model.makeChanges();
+};
+
 const init = function () {
   FlightView.addHandlerRender(controlFlight);
   searchView.addHandlerSearch(controlSearchResults);
   addFlightView.addHandlerUpload(controlAddFlight);
   PaginationView.addHandlerClick(controlPagination);
+  editFlightView.addHandlerEditButton(controlEditButton);
 };
 init();

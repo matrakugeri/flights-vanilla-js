@@ -11,21 +11,31 @@ export const state = {
   },
 };
 
+let flightNumber = document.getElementById("flight-numberEdit");
+let origin = document.getElementById("originEdit");
+let originFullName = document.getElementById("originFullNameEdit");
+let destination = document.getElementById("destinationEdit");
+let destinationFullName = document.getElementById("destinationFullNameEdit");
+let title = document.getElementById("titleEdit");
+let departure = document.getElementById("departureEdit");
+let arrival = document.getElementById("arrivalEdit");
+let status = document.getElementById("statusEdit");
+
 export const loadFlight = async function (id) {
   try {
     const data = await getJSON(`${API_URL}${id}`);
-    let flight = data;
+
     state.flight = {
-      id: flight.id,
-      arrivalTime: flight.arrivalTime,
-      departureTime: flight.departureTime,
-      destination: flight.destination,
-      destinationFullName: flight.destinationFullName,
-      flightNumber: flight.flightNumber,
-      origin: flight.origin,
-      originFullName: flight.originFullName,
-      title: flight.title,
-      status: flight.status,
+      id: data.id,
+      arrivalTime: data.arrivalTime,
+      departureTime: data.departureTime,
+      destination: data.destination,
+      destinationFullName: data.destinationFullName,
+      flightNumber: data.flightNumber,
+      origin: data.origin,
+      originFullName: data.originFullName,
+      title: data.title,
+      status: data.status,
     };
   } catch (err) {
     console.error(err);
@@ -96,6 +106,23 @@ export const uploadFlight = async function (newFlight) {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const makeChanges = function () {
+  flightNumber.value = state.flight.flightNumber;
+  origin.value = state.flight.origin;
+  originFullName.value = state.flight.originFullName;
+  destination.value = state.flight.destination;
+  destinationFullName.value = state.flight.destinationFullName;
+  title.value = state.flight.title;
+  departure.value = state.flight.departureTime;
+  arrival.value = state.flight.arrivalTime;
+  status.value = state.flight.status;
+  console.log(title.value);
+  console.log(state.flight.title);
+  console.log(arrival.value);
+  console.log(departure.value);
+  console.log(status.value);
 };
 
 // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
