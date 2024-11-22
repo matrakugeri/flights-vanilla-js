@@ -271,12 +271,14 @@ input::placeholder {
 /* FORM TO UPLOAD */
 /*********************************/
 
+.hidden-form-edit,
 .hidden-form {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 7rem;
 }
 
+.form-information-edit,
 .form-information {
   position: fixed;
   width: 100%;
@@ -285,6 +287,8 @@ input::placeholder {
   top: 0;
   backdrop-filter: blur(5px);
 }
+
+.new-flight-edit,
 .new-flight {
   position: fixed;
   top: 50%;
@@ -301,6 +305,7 @@ input::placeholder {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.pos-edit,
 .pos {
   position: absolute;
   cursor: pointer;
@@ -309,6 +314,7 @@ input::placeholder {
   font-size: 2.4rem;
 }
 
+.hidden-form-edit,
 .hidden-form label {
   font-size: 1.7rem;
 }
@@ -323,6 +329,7 @@ input::placeholder {
   font-style: italic;
 }
 
+.new-flight-edit form input::placeholder,
 .new-flight form input::placeholder {
   opacity: 60%;
 }
@@ -341,6 +348,21 @@ input::placeholder {
   font-weight: 500;
 }
 
+.edit-btn {
+  padding: 2.2rem 3.2rem;
+  border-radius: 22px;
+  width: 30rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s;
+  margin-top: 1.2rem;
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 500;
+  background-color: #495057;
+}
+
+.edit-btn:hover,
 .upload-btn:hover {
   background-color: #adb5bd;
 }
@@ -452,10 +474,6 @@ input::placeholder {
   opacity: 80%;
   font-weight: 800;
   font-size: 1.8rem;
-}
-
-.flight-status {
-  /* grid-row: 1 / span 2; */
 }
 
 .grid-container p {

@@ -116,17 +116,19 @@
                 <p>$STATUS</p>
                 </div>
                 </div>
-                <div class="buttons">
-                  <button class="edit">
-                    Edit&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="delete">
-                      Delete&nbsp;&nbsp;<i class="fa-solid fa-trash-can"></i>
-                      </button>
-                      </div>
+                
                       </div>
                       -->
       </div>
+    </div>
+
+    <div class="buttons hidden">
+      <button class="edit">
+        Edit&nbsp;&nbsp;<i class="fa-solid fa-pen-to-square"></i>
+      </button>
+      <button class="delete">
+        Delete&nbsp;&nbsp;<i class="fa-solid fa-trash-can"></i>
+      </button>
     </div>
 
     <!--  SPINNER DIV
@@ -150,14 +152,14 @@
           <input class="flight-form" type="text" id="flight-number" placeholder="UA820" value="UA820" required="" name="flightNumber">
           <label for="origin">Origin Name</label>
           <input class="flight-form" type="text" id="origin" placeholder="Country" value="ATH" required="" name="origin">
-          <label for="origin">Origin Fullname</label>
-          <input class="flight-form" type="text" id="origin" placeholder="Country" value="Athens" required="" name="originFullName">
+          <label for="originFullName">Origin Fullname</label>
+          <input class="flight-form" type="text" id="originFullName" placeholder="Country" value="Athens" required="" name="originFullName">
         </div>
         <div>
           <label for="destination">Destination Name</label>
           <input class="flight-form" type="text" id="destination" placeholder="Country" value="VIE" required="" name="destination">
-          <label for="destination">Destination Fullname</label>
-          <input class="flight-form" type="text" id="destination" placeholder="Country" value="Austria" required="" name="destinationFullName">
+          <label for="destinationFullName">Destination Fullname</label>
+          <input class="flight-form" type="text" id="destinationFullName" placeholder="Country" value="Austria" required="" name="destinationFullName">
           <label for="title">Title</label>
           <input class="flight-form" type="text" id="title" placeholder="Rome to San Francisco" value="Athens to Vienna" required="" name="title">
         </div>
@@ -172,19 +174,44 @@
             <option value="Delayed">Delayed</option>
             <option value="Cancelled">Cancelled</option>
           </select>
-          <!--
-            <label for="status">Status</label>
-            <input
-            //   class="flight-form"
-            //   type="text"
-            //   id="status"
-            //   placeholder="Scheduled"
-            //   value="Scheduled"
-            //   required
-            //   name="status"
-            // />
-            -->
+
           <button class="upload-btn">UPLOAD</button>
+        </div>
+      </form>
+    </div>
+    <section class="form-information-edit hidden"></section>
+    <div class="new-flight-edit hidden">
+      <i class="fa-solid fa-xmark pos-edit"></i>
+      <form class="hidden-form-edit">
+        <div>
+          <label for="flight-numberEdit">Flight Number</label>
+          <input class="flight-form" type="text" id="flight-numberEdit" placeholder="UA820" value="" required="" name="flightNumber">
+          <label for="originEdit">Origin Name</label>
+          <input class="flight-form" type="text" id="originEdit" placeholder="Country" value="" required="" name="origin">
+          <label for="originFullNameEdit">Origin Fullname</label>
+          <input class="flight-form" type="text" id="originFullNameEdit" placeholder="Country" value="" required="" name="originFullName">
+        </div>
+        <div>
+          <label for="destinationEdit">Destination Name</label>
+          <input class="flight-form" type="text" id="destinationEdit" placeholder="Country" value="" required="" name="destination">
+          <label for="destinationFullNameEdit">Destination Fullname</label>
+          <input class="flight-form" type="text" id="destinationFullNameEdit" placeholder="Country" value="" required="" name="destinationFullName">
+          <label for="titleEdit">Title</label>
+          <input class="flight-form" type="text" id="titleEdit" placeholder="Rome to San Francisco" value="" required="" name="title">
+        </div>
+        <div>
+          <label for="departureEdit">Departure Time</label>
+          <input class="flight-form" type="datetime-local" id="departureEdit" value="" required="" name="departure">
+          <label for="arrivalEdit">Arrival Time</label>
+          <input class="flight-form" type="datetime-local" id="arrivalEdit" value="" required="" name="arrival">
+          <label for="statusEdit">Status</label>
+          <select id="statusEdit" name="status" class="paddr">
+            <option value="Scheduled">Scheduled</option>
+            <option value="Delayed">Delayed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+
+          <button class="edit-btn">SAVE CHANGES</button>
         </div>
       </form>
     </div>
