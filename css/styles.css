@@ -164,6 +164,12 @@ input::placeholder {
   font-style: italic;
 }
 
+.flexbox {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
 .copyright {
   color: #918581;
   margin: 2.2rem 2.5rem;
@@ -250,8 +256,8 @@ input::placeholder {
 /******************************/
 
 .pagination {
-  padding: 2rem 1.2rem;
-  margin-top: auto;
+  padding: 3rem 1.2rem;
+  margin-bottom: 10rem;
 }
 
 .pagination-btn {
