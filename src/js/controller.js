@@ -66,9 +66,7 @@ const controlAddFlight = async function (newFlight) {
     window.history.pushState(null, "", `#${model.state.flight.id}`);
 
     // Hide modal after uploading
-    setTimeout(function () {
-      addFlightView.toggleWindow();
-    }, MODAL_SEC * 700);
+    addFlightView.toggleWindow();
   } catch (err) {
     console.error(err);
   }
@@ -107,6 +105,7 @@ const controlEdit = async function (newFlight) {
     // Rendering the flight with the data stored in state
     FlightView.render(model.state.flight);
     ResultsView.render(model.state.search.results);
+    // editFlightView.renderMessage(`Flight Succesfully uploaded`);
     // Hide modal after uploading
     editFlightView.toggleWindow();
   } catch (err) {

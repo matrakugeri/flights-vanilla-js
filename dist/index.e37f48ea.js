@@ -593,9 +593,7 @@ const controlAddFlight = async function(newFlight) {
         // Change the window history pushstate
         window.history.pushState(null, "", `#${_modelJs.state.flight.id}`);
         // Hide modal after uploading
-        setTimeout(function() {
-            (0, _addFlightViewJsDefault.default).toggleWindow();
-        }, (0, _config.MODAL_SEC) * 700);
+        (0, _addFlightViewJsDefault.default).toggleWindow();
     } catch (err) {
         console.error(err);
     }
@@ -629,6 +627,7 @@ const controlEdit = async function(newFlight) {
         // Rendering the flight with the data stored in state
         (0, _flightViewJsDefault.default).render(_modelJs.state.flight);
         (0, _resultsViewJsDefault.default).render(_modelJs.state.search.results);
+        // editFlightView.renderMessage(`Flight Succesfully uploaded`);
         // Hide modal after uploading
         (0, _editFlightViewJsDefault.default).toggleWindow();
     } catch (err) {
