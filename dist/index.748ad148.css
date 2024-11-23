@@ -141,12 +141,6 @@ input::placeholder {
   font-style: italic;
 }
 
-.flexbox {
-  flex-direction: column;
-  gap: 3rem;
-  display: flex;
-}
-
 .copyright {
   color: #7e6161;
   margin: 2.2rem 2.5rem;
