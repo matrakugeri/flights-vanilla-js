@@ -1,5 +1,5 @@
 import { API_URL, key, RES_PER_PAGE } from "./config";
-import { editJSON, getJSON, sendJSON } from "./helpers.js";
+import { editJSON, getJSON, sendJSON, deleteJSON } from "./helpers.js";
 export const state = {
   flight: {},
   search: {
@@ -38,7 +38,6 @@ export const loadFlight = async function (id) {
       status: data.status,
     };
   } catch (err) {
-    console.error(err);
     throw err;
   }
 };
@@ -104,31 +103,35 @@ export const uploadFlight = async function (newFlight) {
     console.log(data);
     console.log(state.flight);
   } catch (err) {
-    console.error(err);
+    throw err;
   }
 };
 
 export const saveChanges = async function (newFlight) {
-  const flight = {
-    arrivalTime: newFlight.arrival,
-    departureTime: newFlight.departure,
-    destination: newFlight.destination,
-    destinationFullName: newFlight.destinationFullName,
-    flightNumber: newFlight.flightNumber,
-    origin: newFlight.origin,
-    originFullName: newFlight.originFullName,
-    title: newFlight.title,
-    status: newFlight.status,
-  };
-  const id = window.location.hash.slice(1);
-  const data = await editJSON(`${API_URL}${id}`, flight);
-  state.flight = { id, ...flight };
-  console.log(state.flight);
-  console.warn(state.search.results);
-  const flightIndex = state.search.results.findIndex((el) => +el.id === +id);
-  state.search.results[flightIndex] = state.flight;
-  console.log(flightIndex);
-  console.log(data);
+  try {
+    const flight = {
+      arrivalTime: newFlight.arrival,
+      departureTime: newFlight.departure,
+      destination: newFlight.destination,
+      destinationFullName: newFlight.destinationFullName,
+      flightNumber: newFlight.flightNumber,
+      origin: newFlight.origin,
+      originFullName: newFlight.originFullName,
+      title: newFlight.title,
+      status: newFlight.status,
+    };
+    const id = window.location.hash.slice(1);
+    const data = await editJSON(`${API_URL}${id}`, flight);
+    state.flight = { id, ...flight };
+    console.log(state.flight);
+    console.warn(state.search.results);
+    const flightIndex = state.search.results.findIndex((el) => +el.id === +id);
+    state.search.results[flightIndex] = state.flight;
+    console.log(flightIndex);
+    console.log(data);
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const makeChanges = function () {
@@ -143,9 +146,19 @@ export const makeChanges = function () {
   status.value = state.flight.status;
   console.log(title.value);
   console.log(state.flight.title);
+  console.log(state.flight.arrivalTime);
   console.log(arrival.value);
   console.log(departure.value);
   console.log(status.value);
+};
+
+export const loadDelete = async function () {
+  try {
+    const id = window.location.hash.slice(1);
+    const data = await deleteJSON(`${API_URL}${id}`);
+  } catch (err) {
+    throw err;
+  }
 };
 
 // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);

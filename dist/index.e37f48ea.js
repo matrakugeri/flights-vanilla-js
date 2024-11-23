@@ -635,6 +635,19 @@ const controlEdit = async function(newFlight) {
         console.log(err);
     }
 };
+const ControlDelete = async function() {
+    // Await the loadDelete function to finish its asynchronous task
+    await _modelJs.loadDelete();
+    // Clear the inner html of FlightView after deleting the flight
+    (0, _flightViewJsDefault.default)._clear();
+    // Render the Sucessfully deleted message
+    (0, _flightViewJsDefault.default).renderMessage();
+    // Clearing the results and Pagination
+    (0, _resultsViewJsDefault.default)._clear();
+    (0, _paginationViewJsDefault.default)._clear();
+    // Clear the hash location so in case of reloading it wont cause any errors of searching the inexistent id
+    window.location.hash = "";
+};
 const init = function() {
     (0, _flightViewJsDefault.default).addHandlerRender(controlFlight);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
@@ -642,6 +655,7 @@ const init = function() {
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
     (0, _editFlightViewJsDefault.default).addHandlerEditButton(controlEditButton);
     (0, _editFlightViewJsDefault.default).addHandlerEdit(controlEdit);
+    (0, _editFlightViewJsDefault.default).addHandlerDelete(ControlDelete);
 };
 init();
 
@@ -696,6 +710,7 @@ parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "uploadFlight", ()=>uploadFlight);
 parcelHelpers.export(exports, "saveChanges", ()=>saveChanges);
 parcelHelpers.export(exports, "makeChanges", ()=>makeChanges);
+parcelHelpers.export(exports, "loadDelete", ()=>loadDelete);
 var _config = require("./config");
 var _helpersJs = require("./helpers.js");
 const state = {
@@ -733,7 +748,6 @@ const loadFlight = async function(id) {
             status: data.status
         };
     } catch (err) {
-        console.error(err);
         throw err;
     }
 };
@@ -790,33 +804,37 @@ const uploadFlight = async function(newFlight) {
         console.log(data);
         console.log(state.flight);
     } catch (err) {
-        console.error(err);
+        throw err;
     }
 };
 const saveChanges = async function(newFlight) {
-    const flight = {
-        arrivalTime: newFlight.arrival,
-        departureTime: newFlight.departure,
-        destination: newFlight.destination,
-        destinationFullName: newFlight.destinationFullName,
-        flightNumber: newFlight.flightNumber,
-        origin: newFlight.origin,
-        originFullName: newFlight.originFullName,
-        title: newFlight.title,
-        status: newFlight.status
-    };
-    const id = window.location.hash.slice(1);
-    const data = await (0, _helpersJs.editJSON)(`${(0, _config.API_URL)}${id}`, flight);
-    state.flight = {
-        id,
-        ...flight
-    };
-    console.log(state.flight);
-    console.warn(state.search.results);
-    const flightIndex = state.search.results.findIndex((el)=>+el.id === +id);
-    state.search.results[flightIndex] = state.flight;
-    console.log(flightIndex);
-    console.log(data);
+    try {
+        const flight = {
+            arrivalTime: newFlight.arrival,
+            departureTime: newFlight.departure,
+            destination: newFlight.destination,
+            destinationFullName: newFlight.destinationFullName,
+            flightNumber: newFlight.flightNumber,
+            origin: newFlight.origin,
+            originFullName: newFlight.originFullName,
+            title: newFlight.title,
+            status: newFlight.status
+        };
+        const id = window.location.hash.slice(1);
+        const data = await (0, _helpersJs.editJSON)(`${(0, _config.API_URL)}${id}`, flight);
+        state.flight = {
+            id,
+            ...flight
+        };
+        console.log(state.flight);
+        console.warn(state.search.results);
+        const flightIndex = state.search.results.findIndex((el)=>+el.id === +id);
+        state.search.results[flightIndex] = state.flight;
+        console.log(flightIndex);
+        console.log(data);
+    } catch (err) {
+        throw err;
+    }
 };
 const makeChanges = function() {
     flightNumber.value = state.flight.flightNumber;
@@ -830,9 +848,18 @@ const makeChanges = function() {
     status.value = state.flight.status;
     console.log(title.value);
     console.log(state.flight.title);
+    console.log(state.flight.arrivalTime);
     console.log(arrival.value);
     console.log(departure.value);
     console.log(status.value);
+};
+const loadDelete = async function() {
+    try {
+        const id = window.location.hash.slice(1);
+        const data = await (0, _helpersJs.deleteJSON)(`${(0, _config.API_URL)}${id}`);
+    } catch (err) {
+        throw err;
+    }
 }; // await fetch(`${API_URL}?_start=10&_limit=10&q=${query}`);
 
 },{"./config":"k5Hzs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helpers.js":"hGI1E"}],"hGI1E":[function(require,module,exports) {
@@ -841,6 +868,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getJSON", ()=>getJSON);
 parcelHelpers.export(exports, "sendJSON", ()=>sendJSON);
 parcelHelpers.export(exports, "editJSON", ()=>editJSON);
+parcelHelpers.export(exports, "deleteJSON", ()=>deleteJSON);
 const getJSON = async function(url) {
     try {
         const res = await fetch(url);
@@ -877,12 +905,27 @@ const editJSON = async function(url, uploadData) {
             },
             body: JSON.stringify(uploadData)
         });
-        if (!res.ok) return;
+        if (!res.ok) throw new Error(`${res.status}`);
         const data = res.json();
         console.log(res, data);
         return data;
     } catch (err) {
-        console.error(err);
+        throw err;
+    }
+};
+const deleteJSON = async function(url) {
+    try {
+        const res = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json"
+            }
+        });
+        if (!res.ok) throw new Error(`${res.status}`);
+        const data = await res.json();
+        return data;
+    } catch (err) {
+        throw err;
     }
 };
 
@@ -894,6 +937,7 @@ var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
 class FlightView extends (0, _viewJsDefault.default) {
     _parentEl = document.querySelector(".container-2");
     _data;
+    _message = `Flight successfully deleted`;
     FormatArrival(data) {
         this._data = data;
         const date = new Date(this._data.arrivalTime);
@@ -994,7 +1038,7 @@ class View {
         this._clear();
         this._parentEl.insertAdjacentHTML("afterbegin", markup);
     }
-    renderMessage(message = this.message) {
+    renderMessage(message = this._message) {
         const markup = `
     <div class="message">
       <p>${message}</p>
@@ -1216,6 +1260,13 @@ class editFlightView extends (0, _viewDefault.default) {
         super();
         // this.addHandlerClick();
         this.addHandlerRemove();
+    }
+    addHandlerDelete(handler) {
+        this._parentEl2.addEventListener("click", (e)=>{
+            const clicked = e.target.closest(".delete");
+            if (!clicked) return;
+            handler();
+        });
     }
     toggleWindow() {
         this._overlay.classList.toggle("hidden");

@@ -1,16 +1,16 @@
 {
   "flights": [
     {
-      "id": 1,
+      "arrivalTime": "2024-11-13T13:31",
+      "departureTime": "2024-11-13T13:31",
+      "destination": "SFO",
+      "destinationFullName": "San Francisco",
       "flightNumber": "UA820",
       "origin": "FCO",
       "originFullName": "Rome",
-      "destination": "SFO",
-      "destinationFullName": "San Francisco",
-      "departureTime": "2024-12-11T04:45:18.923482",
-      "arrivalTime": "2024-12-11T10:45:18.923482",
+      "title": "Rome to San Francisco",
       "status": "Cancelled",
-      "title": "Rome to San Francisco"
+      "id": 1
     },
     {
       "id": 2,
@@ -19,8 +19,8 @@
       "originFullName": "San Francisco",
       "destination": "ATL",
       "destinationFullName": "Atlanta",
-      "departureTime": "2024-11-20T02:45:18.923482",
-      "arrivalTime": "2024-11-20T08:45:18.923482",
+      "departureTime": "2024-11-20T02:45",
+      "arrivalTime": "2024-11-20T08:45",
       "status": "Scheduled",
       "title": "San Francisco to Atlanta"
     },
@@ -31,8 +31,8 @@
       "originFullName": "Atlanta",
       "destination": "CDG",
       "destinationFullName": "Paris",
-      "departureTime": "2024-11-30T23:45:18.923482",
-      "arrivalTime": "2024-12-01T02:45:18.923482",
+      "departureTime": "2024-11-30T23:45",
+      "arrivalTime": "2024-12-01T02:45",
       "status": "Cancelled",
       "title": "Atlanta to Paris"
     },
@@ -43,8 +43,8 @@
       "originFullName": "Atlanta",
       "destination": "CDG",
       "destinationFullName": "Paris",
-      "departureTime": "2024-11-15T15:45:18.923482",
-      "arrivalTime": "2024-11-15T20:45:18.923482",
+      "departureTime": "2024-11-15T15:45",
+      "arrivalTime": "2024-11-15T20:45",
       "status": "Delayed",
       "title": "Atlanta to Paris"
     },
@@ -55,8 +55,8 @@
       "originFullName": "Milano",
       "destination": "ORD",
       "destinationFullName": "Chicago",
-      "departureTime": "2024-11-24T07:45:18.923482",
-      "arrivalTime": "2024-11-24T11:45:18.923482",
+      "departureTime": "2024-11-24T07:45",
+      "arrivalTime": "2024-11-24T11:45",
       "status": "Scheduled",
       "title": "Milano to Chicago"
     },
@@ -67,8 +67,8 @@
       "originFullName": "Rome",
       "destination": "SFO",
       "destinationFullName": "San Francisco",
-      "departureTime": "2024-11-26T00:45:18.923482",
-      "arrivalTime": "2024-11-26T05:45:18.923482",
+      "departureTime": "2024-11-26T00:45",
+      "arrivalTime": "2024-11-26T05:45",
       "status": "Cancelled",
       "title": "Rome to San Francisco"
     },
@@ -79,22 +79,22 @@
       "originFullName": "Milano",
       "destination": "SFO",
       "destinationFullName": "San Francisco",
-      "departureTime": "2024-11-15T03:45:18.923482",
-      "arrivalTime": "2024-11-15T11:45:18.923482",
+      "departureTime": "2024-11-15T03:45",
+      "arrivalTime": "2024-11-15T11:45",
       "status": "Delayed",
       "title": "Milano to San Francisco"
     },
     {
-      "id": 9,
+      "arrivalTime": "2024-01-23T01:23",
+      "departureTime": "2024-06-13T02:24",
+      "destination": "CDG",
+      "destinationFullName": "Paris",
       "flightNumber": "BA655",
       "origin": "MXP",
       "originFullName": "Milano",
-      "destination": "CDG",
-      "destinationFullName": "Paris",
-      "departureTime": "2024-12-07T22:45:18.923482",
-      "arrivalTime": "2024-12-08T06:45:18.923482",
+      "title": "Milano to Paris",
       "status": "Scheduled",
-      "title": "Milano to Paris"
+      "id": 9
     },
     {
       "id": 10,
@@ -103,8 +103,8 @@
       "originFullName": "Chicago",
       "destination": "LAX",
       "destinationFullName": "Los Angeles",
-      "departureTime": "2024-12-04T12:45:18.923482",
-      "arrivalTime": "2024-12-04T15:45:18.923482",
+      "departureTime": "2024-12-04T12:45",
+      "arrivalTime": "2024-12-04T15:45",
       "status": "Delayed",
       "title": "Chicago to Los Angeles"
     },
@@ -115,8 +115,8 @@
       "originFullName": "Paris",
       "destination": "JFK",
       "destinationFullName": "New York",
-      "departureTime": "2024-11-23T14:45:18.923482",
-      "arrivalTime": "2024-11-23T20:45:18.923482",
+      "departureTime": "2024-11-23T14:45",
+      "arrivalTime": "2024-11-23T20:45",
       "status": "Delayed",
       "title": "Paris to New York"
     },
@@ -127,8 +127,8 @@
       "originFullName": "Paris",
       "destination": "MXP",
       "destinationFullName": "Milano",
-      "departureTime": "2024-12-12T04:45:18.923482",
-      "arrivalTime": "2024-12-12T10:45:18.923482",
+      "departureTime": "2024-12-12T04:45",
+      "arrivalTime": "2024-12-12T10:45",
       "status": "Cancelled",
       "title": "Paris to Milano"
     },
@@ -139,8 +139,8 @@
       "originFullName": "Paris",
       "destination": "JFK",
       "destinationFullName": "New York",
-      "departureTime": "2024-11-22T16:45:18.923482",
-      "arrivalTime": "2024-11-22T20:45:18.923482",
+      "departureTime": "2024-11-22T16:45",
+      "arrivalTime": "2024-11-22T20:45",
       "status": "Delayed",
       "title": "Paris to New York"
     },
@@ -151,8 +151,8 @@
       "originFullName": "Paris",
       "destination": "ORD",
       "destinationFullName": "Chicago",
-      "departureTime": "2024-11-15T09:45:18.923482",
-      "arrivalTime": "2024-11-15T15:45:18.923482",
+      "departureTime": "2024-11-15T09:45",
+      "arrivalTime": "2024-11-15T15:45",
       "status": "Scheduled",
       "title": "Paris to Chicago"
     },
@@ -163,8 +163,8 @@
       "originFullName": "New York",
       "destination": "ORD",
       "destinationFullName": "Chicago",
-      "departureTime": "2024-11-16T04:45:18.923482",
-      "arrivalTime": "2024-11-16T06:45:18.923482",
+      "departureTime": "2024-11-16T04:45",
+      "arrivalTime": "2024-11-16T06:45",
       "status": "Cancelled",
       "title": "New York to Chicago"
     },
@@ -175,8 +175,8 @@
       "originFullName": "Milano",
       "destination": "JFK",
       "destinationFullName": "New York",
-      "departureTime": "2024-12-09T18:45:18.923482",
-      "arrivalTime": "2024-12-09T23:45:18.923482",
+      "departureTime": "2024-12-09T18:45",
+      "arrivalTime": "2024-12-09T23:45",
       "status": "Delayed",
       "title": "Milano to New York"
     },
@@ -187,8 +187,8 @@
       "originFullName": "Rome",
       "destination": "ORD",
       "destinationFullName": "Chicago",
-      "departureTime": "2024-11-12T18:45:18.923482",
-      "arrivalTime": "2024-11-13T02:45:18.923482",
+      "departureTime": "2024-11-12T18:45",
+      "arrivalTime": "2024-11-13T02:45",
       "status": "Delayed",
       "title": "Rome to Chicago"
     },
@@ -199,8 +199,8 @@
       "originFullName": "Paris",
       "destination": "SFO",
       "destinationFullName": "San Francisco",
-      "departureTime": "2024-12-12T08:45:18.923482",
-      "arrivalTime": "2024-12-12T15:45:18.923482",
+      "departureTime": "2024-12-12T08:45",
+      "arrivalTime": "2024-12-12T15:45",
       "status": "Scheduled",
       "title": "Paris to San Francisco"
     },
@@ -211,8 +211,8 @@
       "originFullName": "Paris",
       "destination": "SFO",
       "destinationFullName": "San Francisco",
-      "departureTime": "2024-12-09T01:45:18.923482",
-      "arrivalTime": "2024-12-09T03:45:18.923482",
+      "departureTime": "2024-12-09T01:45",
+      "arrivalTime": "2024-12-09T03:45",
       "status": "Scheduled",
       "title": "Paris to San Francisco"
     },
@@ -223,8 +223,8 @@
       "originFullName": "Paris",
       "destination": "FCO",
       "destinationFullName": "Rome",
-      "departureTime": "2024-12-07T04:45:18.923482",
-      "arrivalTime": "2024-12-07T09:45:18.923482",
+      "departureTime": "2024-12-07T04:45",
+      "arrivalTime": "2024-12-07T09:45",
       "status": "Cancelled",
       "title": "Paris to Rome"
     },
@@ -239,30 +239,6 @@
       "title": "Done",
       "status": "Cancelled",
       "id": 21
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 22
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 23
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -284,45 +260,9 @@
       "flightNumber": "commebolUSa",
       "origin": "ALSD",
       "originFullName": "ALBANIA",
-      "title": "Albania to Vienna",
+      "title": "Albania to Greece",
       "status": "Scheduled",
       "id": 25
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Albania",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 26
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATHs",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 27
-    },
-    {
-      "arrivalTime": "2024-01-25T04:20",
-      "departureTime": "2024-02-24T18:45",
-      "destination": "TR",
-      "destinationFullName": "TurkeyDADAADA",
-      "flightNumber": "nnnne",
-      "origin": "Asdadadadada",
-      "originFullName": "Albania",
-      "title": "Albania to TurkeyA",
-      "status": "Cancelled",
-      "id": 28
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -346,43 +286,7 @@
       "originFullName": "Athens",
       "title": "Athens to Vienna",
       "status": "Scheduled",
-      "id": 30
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "adad",
-      "destinationFullName": "Austriaadada",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 31
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
       "id": 32
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 33
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -418,43 +322,7 @@
       "originFullName": "Athens",
       "title": "Athens to Vienna",
       "status": "Scheduled",
-      "id": 36
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 37
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
       "id": 38
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 39
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -529,18 +397,6 @@
       "id": 45
     },
     {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIEddd",
-      "destinationFullName": "Austriadd",
-      "flightNumber": "UA820ddd",
-      "origin": "ATHd",
-      "originFullName": "Athensdd",
-      "title": "Athens to Viennaddd",
-      "status": "delayed",
-      "id": 46
-    },
-    {
       "arrivalTime": "2024-11-13T04:20",
       "departureTime": "2024-11-24T18:45",
       "destination": "FRA",
@@ -551,18 +407,6 @@
       "title": "Atlanta to Paris",
       "status": "Scheduled",
       "id": 47
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Cancelled",
-      "id": 48
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -611,18 +455,6 @@
       "title": "Athens to Vienna",
       "status": "Cancelled",
       "id": 52
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austriadddd",
-      "flightNumber": "UA820",
-      "origin": "dd",
-      "originFullName": "Athens",
-      "title": "Athens to Viennaadadda",
-      "status": "Delayed",
-      "id": 53
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -695,18 +527,6 @@
       "title": "Athens to Vienna",
       "status": "Scheduled",
       "id": 59
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austriaasdadadadqas",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Viennadzxczxc",
-      "status": "Scheduled",
-      "id": 60
     },
     {
       "arrivalTime": "2024-06-25T05:20",
@@ -827,6 +647,102 @@
       "title": "ttt",
       "status": "Scheduled",
       "id": 70
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ETIJ",
+      "originFullName": "Athens",
+      "title": "okaiai",
+      "status": "Scheduled",
+      "id": 71
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 72
+    },
+    {
+      "arrivalTime": "2024-11-28T13:20",
+      "departureTime": "2024-11-27T07:50",
+      "destination": "SRB",
+      "destinationFullName": "Serbia",
+      "flightNumber": "UA820",
+      "origin": "SUISS",
+      "originFullName": "Switzerland",
+      "title": "Switzerland to Serbia",
+      "status": "Scheduled",
+      "id": 73
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 74
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 75
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 76
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 77
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Austria",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 78
     }
   ]
 }

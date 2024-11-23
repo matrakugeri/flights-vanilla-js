@@ -25,6 +25,7 @@ html {
 body {
   font-family: "Nunito", "Geist Mono", sans-serif;
   /* position: relative; */
+  background: linear-gradient(to bottom right, #d3c7c3, #d3dce1);
 }
 
 .hidden {
@@ -41,12 +42,14 @@ body {
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
   min-height: 100vh;
-  box-shadow: 0 2rem 6rem 0.5rem rgba(97, 85, 81, 0.2);
+  /* box-shadow: 0 2rem 6rem 0.5rem rgba(97, 85, 81, 0.2); */
+  box-shadow: 1px 2px 3rem #aaa;
 }
 
 .container-1 {
   background-color: #d3c7c3;
   border-radius: 22px 0 0 22px;
+  position: relative;
 }
 
 .inner-container {
@@ -160,6 +163,15 @@ input::placeholder {
   font-style: italic;
 }
 
+.copyright {
+  color: #918581;
+  margin: 2.2rem 2.5rem;
+  font-size: 1.3rem;
+  color: #7e6161;
+  bottom: 0;
+  position: absolute;
+}
+
 .search-results {
   list-style: none;
 }
@@ -238,6 +250,7 @@ input::placeholder {
 
 .pagination {
   padding: 2rem 1.2rem;
+  margin-top: auto;
 }
 
 .pagination-btn {
@@ -586,11 +599,21 @@ input::placeholder {
 }
 
 .message {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 5rem 4rem;
+  text-align: center;
+  /* display: flex; */
+  /* align-items: center; */
+  padding: 3rem;
+  opacity: 75%;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #5e2828;
+  font-family: "Nunito sans";
 }
 
-.message p {
-  font-size: 1.6rem;
-}
+/* .message p {
+  font-size: 2.2rem;
+  font-family: "Nunito-Sans";
+  opacity: 75%;
+  font-weight: 600;
+  color: #5e2828;
+} */

@@ -37,11 +37,27 @@ export const editJSON = async function (url, uploadData) {
       body: JSON.stringify(uploadData),
     });
 
-    if (!res.ok) return;
+    if (!res.ok) throw new Error(`${res.status}`);
     const data = res.json();
     console.log(res, data);
     return data;
   } catch (err) {
-    console.error(err);
+    throw err;
+  }
+};
+
+export const deleteJSON = async function (url) {
+  try {
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    if (!res.ok) throw new Error(`${res.status}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    throw err;
   }
 };

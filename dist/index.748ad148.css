@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  background: linear-gradient(to bottom right, #d3c7c3, #d3dce1);
   font-family: Nunito, Geist Mono, sans-serif;
 }
 
@@ -25,12 +26,13 @@ body {
   min-height: 100vh;
   margin: 5rem auto;
   display: grid;
-  box-shadow: 0 2rem 6rem .5rem #61555133;
+  box-shadow: 1px 2px 3rem #aaa;
 }
 
 .container-1 {
   background-color: #d3c7c3;
   border-radius: 22px 0 0 22px;
+  position: relative;
 }
 
 .inner-container {
@@ -138,6 +140,14 @@ input::placeholder {
   font-style: italic;
 }
 
+.copyright {
+  color: #7e6161;
+  margin: 2.2rem 2.5rem;
+  font-size: 1.3rem;
+  position: absolute;
+  bottom: 0;
+}
+
 .search-results {
   list-style: none;
 }
@@ -187,6 +197,7 @@ input::placeholder {
 }
 
 .pagination {
+  margin-top: auto;
   padding: 2rem 1.2rem;
 }
 
@@ -490,13 +501,13 @@ input::placeholder {
 }
 
 .message {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 5rem 4rem;
-}
-
-.message p {
-  font-size: 1.6rem;
+  text-align: center;
+  opacity: .75;
+  color: #5e2828;
+  padding: 3rem;
+  font-family: Nunito sans;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=index.748ad148.css.map */
