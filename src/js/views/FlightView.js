@@ -2,6 +2,7 @@ import View from "./View.js";
 class FlightView extends View {
   _parentEl = document.querySelector(".container-2");
   _data;
+  _message = `Flight successfully deleted`;
 
   FormatArrival(data) {
     this._data = data;

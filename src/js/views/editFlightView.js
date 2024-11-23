@@ -15,6 +15,14 @@ class editFlightView extends View {
     this.addHandlerRemove();
   }
 
+  addHandlerDelete(handler) {
+    this._parentEl2.addEventListener("click", (e) => {
+      const clicked = e.target.closest(".delete");
+      if (!clicked) return;
+      handler();
+    });
+  }
+
   toggleWindow() {
     this._overlay.classList.toggle("hidden");
     this._window.classList.toggle("hidden");

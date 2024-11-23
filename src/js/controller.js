@@ -9,6 +9,7 @@ import searchView from "./views/searchView.js";
 import addFlightView from "./views/addFlightView.js";
 import PaginationView from "./views/paginationView.js";
 import editFlightView from "./views/editFlightView.js";
+import paginationView from "./views/paginationView.js";
 
 const controlFlight = async function () {
   try {
@@ -113,6 +114,20 @@ const controlEdit = async function (newFlight) {
   }
 };
 
+const ControlDelete = async function () {
+  // Await the loadDelete function to finish its asynchronous task
+  await model.loadDelete();
+  // Clear the inner html of FlightView after deleting the flight
+  FlightView._clear();
+  // Render the Sucessfully deleted message
+  FlightView.renderMessage();
+  // Clearing the results and Pagination
+  ResultsView._clear();
+  paginationView._clear();
+  // Clear the hash location so in case of reloading it wont cause any errors of searching the inexistent id
+  window.location.hash = "";
+};
+
 const init = function () {
   FlightView.addHandlerRender(controlFlight);
   searchView.addHandlerSearch(controlSearchResults);
@@ -120,5 +135,6 @@ const init = function () {
   PaginationView.addHandlerClick(controlPagination);
   editFlightView.addHandlerEditButton(controlEditButton);
   editFlightView.addHandlerEdit(controlEdit);
+  editFlightView.addHandlerDelete(ControlDelete);
 };
 init();
