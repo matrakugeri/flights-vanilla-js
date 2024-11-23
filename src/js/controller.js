@@ -64,6 +64,7 @@ const controlAddFlight = async function (newFlight) {
 
     // Change the window history pushstate
     window.history.pushState(null, "", `#${model.state.flight.id}`);
+    // window.location.hash = `${model.state.flight.id}`;
 
     // Hide modal after uploading
     addFlightView.toggleWindow();
