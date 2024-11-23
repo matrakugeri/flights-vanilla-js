@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom right, #d3c7c3, #d3dce1);
+  background: linear-gradient(#d3c4c3, #fff, #d3dce1);
   font-family: Nunito, Geist Mono, sans-serif;
 }
 
@@ -19,7 +19,7 @@ body {
 
 .container {
   background-color: #d3dce1;
-  border-radius: 22px;
+  border-radius: 9px;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 2fr;
   max-width: 120rem;
@@ -31,7 +31,7 @@ body {
 
 .container-1 {
   background-color: #d3c7c3;
-  border-radius: 22px 0 0 22px;
+  border-radius: 9px 0 0 9px;
   position: relative;
 }
 
@@ -327,7 +327,7 @@ input::placeholder {
   }
 
   .container-1 {
-    border-radius: 22px 22px 0 0;
+    border-radius: 9px 9px 0 0;
   }
 
   .flight-div .flight-image {
@@ -342,7 +342,7 @@ input::placeholder {
 .flight-image {
   object-fit: cover;
   opacity: .6;
-  border-radius: 0 22px 0 0;
+  border-radius: 0 9px 0 0;
   max-width: 100%;
 }
 
