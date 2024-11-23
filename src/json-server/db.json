@@ -2,14 +2,14 @@
   "flights": [
     {
       "arrivalTime": "2024-11-13T13:31",
-      "departureTime": "2024-11-13T13:31",
+      "departureTime": "2024-11-15T13:31",
       "destination": "SFO",
       "destinationFullName": "San Francisco",
       "flightNumber": "UA820",
       "origin": "FCO",
       "originFullName": "Rome",
       "title": "Rome to San Francisco",
-      "status": "Cancelled",
+      "status": "Delayed",
       "id": 1
     },
     {
