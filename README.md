@@ -14,7 +14,7 @@ A simple and efficient application to manage flights. This project allows users 
 
 ---
 ## Application View
-![Flights App](https://imgur.com/G6EOCXW)
+![Flights App](https://imgur.com/G6EOCXW.jpg)
 
 ## Tech Stack 
 
