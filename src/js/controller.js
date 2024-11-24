@@ -52,7 +52,7 @@ const controlSearchResults = async function () {
 
 const controlAddFlight = async function (newFlight) {
   try {
-    //Spinner before loading
+    // Spinner before loading
     FlightView.renderSpinner();
     // Loading flight and store it to the state.flight
     await model.uploadFlight(newFlight);
@@ -90,8 +90,9 @@ const controlPagination = async function (goToPage) {
 
 const controlEditButton = async function () {
   try {
+    // Open the modal
     editFlightView.toggleWindow();
-
+    // Display the current values of the object in the inputs of the modal
     model.makeChanges();
   } catch (err) {
     console.log(err);
@@ -117,13 +118,17 @@ const controlEdit = async function (newFlight) {
 const ControlDelete = async function () {
   // Await the loadDelete function to finish its asynchronous task
   await model.loadDelete();
+
   // Clear the inner html of FlightView after deleting the flight
   FlightView._clear();
+
   // Render the Sucessfully deleted message
   FlightView.renderMessage();
+
   // Clearing the results and Pagination
   ResultsView._clear();
   paginationView._clear();
+
   // Clear the hash location so in case of reloading it wont cause any errors of searching the inexistent id
   window.location.hash = "";
 };

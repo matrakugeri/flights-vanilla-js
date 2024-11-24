@@ -11,7 +11,6 @@ class editFlightView extends View {
 
   constructor() {
     super();
-    // this.addHandlerClick();
     this.addHandlerRemove();
   }
 

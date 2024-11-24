@@ -875,6 +875,18 @@
       "title": "DONER",
       "status": "Scheduled",
       "id": 89
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Vienna",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 90
     }
   ]
 }
