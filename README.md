@@ -20,6 +20,6 @@ A simple and efficient application to manage flights. This project allows users 
 
 ## Tech Stack 
 
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: JSON Server for handling flight data
+- **Frontend**: HTML, CSS, JavaScript.
+- **Backend**: JSON Server for handling flight data.
 
