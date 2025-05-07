@@ -1,18 +1,6 @@
 {
   "flights": [
     {
-      "arrivalTime": "2024-11-13T13:31",
-      "departureTime": "2024-11-15T13:31",
-      "destination": "SFO",
-      "destinationFullName": "San Francisco",
-      "flightNumber": "UA820",
-      "origin": "FCO",
-      "originFullName": "Rome",
-      "title": "Rome to San Francisco",
-      "status": "Delayed",
-      "id": 1
-    },
-    {
       "id": 2,
       "flightNumber": "WN426",
       "origin": "SFO",
@@ -61,18 +49,6 @@
       "title": "Milano to Chicago"
     },
     {
-      "id": 7,
-      "flightNumber": "AA909",
-      "origin": "FCO",
-      "originFullName": "Rome",
-      "destination": "SFO",
-      "destinationFullName": "San Francisco",
-      "departureTime": "2024-11-26T00:45",
-      "arrivalTime": "2024-11-26T05:45",
-      "status": "Cancelled",
-      "title": "Rome to San Francisco"
-    },
-    {
       "id": 8,
       "flightNumber": "DL876",
       "origin": "MXP",
@@ -83,18 +59,6 @@
       "arrivalTime": "2024-11-15T11:45",
       "status": "Delayed",
       "title": "Milano to San Francisco"
-    },
-    {
-      "arrivalTime": "2024-01-23T01:23",
-      "departureTime": "2024-06-13T02:24",
-      "destination": "CDG",
-      "destinationFullName": "Paris",
-      "flightNumber": "BA655",
-      "origin": "MXP",
-      "originFullName": "Milano",
-      "title": "Milano to Paris",
-      "status": "Scheduled",
-      "id": 9
     },
     {
       "id": 10,
@@ -191,18 +155,6 @@
       "arrivalTime": "2024-11-13T02:45",
       "status": "Delayed",
       "title": "Rome to Chicago"
-    },
-    {
-      "id": 18,
-      "flightNumber": "BA378",
-      "origin": "CDG",
-      "originFullName": "Paris",
-      "destination": "SFO",
-      "destinationFullName": "San Francisco",
-      "departureTime": "2024-12-12T08:45",
-      "arrivalTime": "2024-12-12T15:45",
-      "status": "Scheduled",
-      "title": "Paris to San Francisco"
     },
     {
       "id": 19,
@@ -323,18 +275,6 @@
       "title": "Athens to Vienna",
       "status": "Scheduled",
       "id": 38
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
-      "title": "Athens to Vienna",
-      "status": "Scheduled",
-      "id": 40
     },
     {
       "arrivalTime": "2024-11-25T12:15",
@@ -788,18 +728,6 @@
       "flightNumber": "UA820",
       "origin": "ATH",
       "originFullName": "Athens",
-      "title": "asdadaadda",
-      "status": "Scheduled",
-      "id": 82
-    },
-    {
-      "arrivalTime": "2024-11-25T12:15",
-      "departureTime": "2024-11-24T18:45",
-      "destination": "VIE",
-      "destinationFullName": "Austria",
-      "flightNumber": "UA820",
-      "origin": "ATH",
-      "originFullName": "Athens",
       "title": "Athens to Vienna",
       "status": "Scheduled",
       "id": 83
@@ -887,6 +815,42 @@
       "title": "Athens to Vienna",
       "status": "Scheduled",
       "id": 90
+    },
+    {
+      "arrivalTime": "2024-05-22T22:00",
+      "departureTime": "2024-05-22T20:00",
+      "destination": "FIU",
+      "destinationFullName": "Rome",
+      "flightNumber": "UA820",
+      "origin": "TIA",
+      "originFullName": "Albania",
+      "title": "Albania to Rome",
+      "status": "Delayed",
+      "id": 91
+    },
+    {
+      "arrivalTime": "2024-12-06T14:15",
+      "departureTime": "2024-11-28T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Vienna",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Delayed",
+      "id": 92
+    },
+    {
+      "arrivalTime": "2024-11-25T12:15",
+      "departureTime": "2024-11-24T18:45",
+      "destination": "VIE",
+      "destinationFullName": "Vienna",
+      "flightNumber": "UA820",
+      "origin": "ATH",
+      "originFullName": "Athens",
+      "title": "Athens to Vienna",
+      "status": "Scheduled",
+      "id": 93
     }
   ]
 }
